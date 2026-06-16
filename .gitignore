@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+node_modules/
+package-lock.json
+shot_*.png
+_shoot*.js
+.gstack/
