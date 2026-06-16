@@ -632,6 +632,177 @@ def _redundant(a: str, b: str) -> bool:
     return bool(wa & wb) or ca in cb or cb in ca
 
 
+# --------------------------------------------------------------------------- #
+# Semantic occupancy guard
+# --------------------------------------------------------------------------- #
+# The combo miner matches LITERAL vocabulary tokens, but real competitors describe
+# the same loop with different words ("Spin a Baddie" == rng + food). A mechanically
+# identical live game is then invisible to the cross-tab and a lane gets mislabeled
+# "untapped / open". Before any such verdict ships, occupancy_check re-scans the
+# corpus with a SYNONYM map (DATA in data/synonyms.json, editable without touching
+# logic) and surfaces the highest-CCU incumbent that actually occupies the lane.
+OCCUPANCY_FLOOR = 1000                        # CCU at/above which an incumbent "occupies" a lane
+SYNONYMS_PATH = os.path.join("data", "synonyms.json")
+
+# Fallback seed, used only when data/synonyms.json is missing. canonical token ->
+# the surface words real games actually use in their name/description.
+_DEFAULT_SYNONYMS: dict[str, list[str]] = {
+    "food": ["food", "cooking", "cook", "recipe", "dish", "restaurant", "diner", "cafe",
+             "kitchen", "chef", "bistro", "snack", "drink", "boba", "ramen", "lemonade",
+             "bake", "meal", "menu", "burger", "pizza", "sushi", "candy", "dessert"],
+    "rng": ["rng", "roll", "dice", "gacha", "spin", "hatch", "unbox", "summon", "lucky",
+            "luck", "mutation", "rarity", "crate", "egg", "gift", "jackpot"],
+    "merge": ["merge", "fuse", "fusion", "combine", "blend"],
+    "steal": ["steal", "rob", "snatch", "grab", "heist", "thief"],
+    "garden": ["garden", "grow", "plant", "farm", "farming", "harvest", "crop", "seed"],
+    "pet": ["pet", "companion", "creature", "critter"],
+    "tycoon": ["tycoon", "empire", "business", "magnate", "mogul"],
+    "simulator": ["simulator", "sim", "simulation"],
+    "horror": ["horror", "scary", "creepy", "haunted", "nightmare"],
+    "zombie": ["zombie", "undead", "infected"],
+}
+_DEFAULT_DENYLIST: list[str] = []
+
+
+def load_synonyms(path: str = SYNONYMS_PATH) -> tuple[dict[str, list[str]], list[str]]:
+    """Load the canonical-token -> surface-variant map (DATA, not logic). Returns
+    (synonyms, denylist); falls back to the seeded default if the file is absent or
+    unreadable. Tolerates {"synonyms": {...}, "denylist": [...]} or a bare
+    {token: [variants]} file."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, dict):
+            syn = data.get("synonyms", data)
+            deny = data.get("denylist", [])
+            if isinstance(syn, dict):
+                syn = {k: list(v) for k, v in syn.items() if k != "denylist" and isinstance(v, list)}
+                if syn:
+                    return syn, list(deny)
+    except (OSError, ValueError):
+        pass
+    return {k: list(v) for k, v in _DEFAULT_SYNONYMS.items()}, list(_DEFAULT_DENYLIST)
+
+
+def load_polluters(path: str = SYNONYMS_PATH) -> list[str]:
+    """Name-substring denylist of known SEO/keyword-bleed mega-titles to skip as
+    incumbents (e.g. the '+1 Speed Keyboard Escape' title that stuffs every trending
+    term into its name). DATA, editable; empty if absent. Mirrors the keyword-bleed
+    filter roblox_viz.compute_right_now already applies to hot_combos."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        pol = data.get("polluters", []) if isinstance(data, dict) else []
+        return [str(p).lower() for p in pol]
+    except (OSError, ValueError):
+        return []
+
+
+def _synonym_index(synonyms: dict[str, list[str]]) -> dict[str, str]:
+    """Reverse map: any surface variant (and each canonical key) -> its canonical key,
+    so occupancy_check resolves correctly whether called with 'rng' or 'roll'."""
+    idx: dict[str, str] = {}
+    for canon, variants in synonyms.items():
+        idx.setdefault(canon.lower(), canon)
+        for v in variants:
+            idx.setdefault(v.lower(), canon)
+    return idx
+
+
+def _variants_for(token: str, synonyms: dict[str, list[str]], index: dict | None = None) -> list[str]:
+    """Surface variants for a token. 'genre:Foo' uses 'Foo'; a token that is itself a
+    variant resolves to its whole cluster; an unmapped token falls back to itself."""
+    base = token.split("genre:")[-1].strip().lower()
+    canon = (index if index is not None else _synonym_index(synonyms)).get(base, base)
+    return synonyms.get(canon, [base])
+
+
+def _occupancy_regex(variants: list[str], denylist: list[str]):
+    """Word-boundary, case-insensitive regex over the variants (minus denylisted ones),
+    allowing common plural/verb suffixes so 'recipes'/'spins' still match. None if empty."""
+    safe = [re.escape(v) for v in variants if v and v.lower() not in denylist]
+    if not safe:
+        return None
+    return re.compile(r"\b(?:" + "|".join(safe) + r")(?:s|es|ing|ed|er|ers)?\b", re.I)
+
+
+def occupancy_check(games: list[Game], a: str, b: str, *, floor: int = OCCUPANCY_FLOOR,
+                    synonyms: dict | None = None, denylist: list | None = None,
+                    polluters: list | None = None, regexes: dict | None = None) -> dict | None:
+    """Is the (a, b) concept ALREADY occupied by a live game whose words differ from the
+    literal vocab tokens? Scans name + description (word-boundary, case-insensitive) for
+    ANY a-variant AND ANY b-variant. Order-independent in (a, b). Returns the highest-CCU
+    match as {incumbent_game, incumbent_ccu, incumbent_url, matched_a, matched_b,
+    above_floor}, or None if nothing matches. `floor` only sets `above_floor`; the caller
+    decides what to do with a sub-floor (weak) incumbent. A null/empty description falls
+    back to a name-only scan and never crashes."""
+    if synonyms is None:
+        synonyms, _deny = load_synonyms()
+        if denylist is None:
+            denylist = _deny
+    denylist = [d.lower() for d in (denylist or [])]
+    polluters = [p.lower() for p in (polluters or [])]
+    index = _synonym_index(synonyms)
+    rx = regexes or {}
+    rx_a = rx.get(a) or _occupancy_regex(_variants_for(a, synonyms, index), denylist)
+    rx_b = rx.get(b) or _occupancy_regex(_variants_for(b, synonyms, index), denylist)
+    if rx_a is None or rx_b is None:
+        return None
+    best = None
+    best_ma = best_mb = ""
+    for g in games:
+        name_l = (g.name or "").lower()
+        if polluters and any(p in name_l for p in polluters):
+            continue                              # known SEO keyword-bleed title - not a real incumbent
+        text = f"{g.name or ''} {g.description or ''}"
+        ma = rx_a.search(text)
+        if not ma:
+            continue
+        mb = rx_b.search(text)
+        if not mb:
+            continue
+        if best is None or g.ccu > best.ccu:
+            best, best_ma, best_mb = g, ma.group(0), mb.group(0)
+    if best is None:
+        return None
+    return {
+        "incumbent_game": best.name,
+        "incumbent_ccu": best.ccu,
+        "incumbent_url": best.url,
+        "matched_a": best_ma,
+        "matched_b": best_mb,
+        "above_floor": best.ccu >= floor,
+    }
+
+
+def concept_tokens(text: str, synonyms: dict | None = None, denylist: list | None = None) -> set[str]:
+    """Canonical tokens whose surface variants appear in `text` (word-boundary,
+    case-insensitive). Turns a free-text theme/lane into vocab concepts for occupancy."""
+    if synonyms is None:
+        synonyms, _deny = load_synonyms()
+        if denylist is None:
+            denylist = _deny
+    denylist = [d.lower() for d in (denylist or [])]
+    found: set[str] = set()
+    for canon, variants in synonyms.items():
+        rx = _occupancy_regex(variants, denylist)
+        if rx and rx.search(text or ""):
+            found.add(canon)
+    return found
+
+
+def _coverage_note(coverage: dict | None, corpus_size: int) -> str:
+    """Corpus-coverage stamp for an open/untapped verdict. Never implies 'never built' -
+    always states the sample size and harvest date, or 'coverage unknown'."""
+    if not coverage:
+        return "coverage unknown"
+    size = coverage.get("corpus_size") or coverage.get("count") or corpus_size
+    date = (coverage.get("harvested") or coverage.get("generated_utc") or "")[:10]
+    if not date:
+        return f"in {size:,}-game sample, harvest date unknown"
+    return f"in {size:,}-game sample, harvested {date}"
+
+
 def harvest_corpus(client: RobloxClient, pages: int = 1, extra_seeds: list[str] | None = None) -> list[Game]:
     """Build a broad Roblox 'catalog': union omni-search over the whole mechanic/theme
     vocabulary plus every trending feed, then enrich. Returns deduped Game objects."""
@@ -671,7 +842,22 @@ def load_corpus(path: str) -> list[Game]:
     return [Game(**{k: d.get(k) for k in names}) for d in data.get("games", [])]
 
 
-def analyze_combos(games: list[Game]) -> dict:
+def load_corpus_meta(path: str) -> dict:
+    """Harvest metadata (everything except the games array) from a saved corpus JSON,
+    used to stamp coverage on verdicts. Returns {} if unreadable; always carries a
+    corpus_size so a coverage note can be produced."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    meta = {k: v for k, v in data.items() if k != "games"}
+    meta.setdefault("corpus_size", data.get("count") or len(data.get("games", [])))
+    return meta
+
+
+def analyze_combos(games: list[Game], *, coverage: dict | None = None,
+                   floor: int = OCCUPANCY_FLOOR, synonyms_path: str = SYNONYMS_PATH) -> dict:
     """Cross-tabulate every tag pair. Surface 'proven & underbuilt' combos (a 1.5k+
     hit exists but few games do it) and 'untapped' combos (both tags popular, never
     combined). Also a scatter row per pair and a 'winning ingredients' tag table."""
@@ -747,8 +933,30 @@ def analyze_combos(games: list[Game]) -> dict:
             })
     ingredients.sort(key=lambda r: r["lift"], reverse=True)
 
+    # ---- semantic occupancy guard: no untapped/open verdict ships unverified ----
+    # Scoped to the (small) untapped list so the corpus re-scan stays cheap; every row
+    # carries an occupancy field + a coverage note, so a clone named with different
+    # words ("Spin a Baddie" for rng x food) flips the lane to OCCUPIED.
+    syn, deny = load_synonyms(synonyms_path)
+    pol = load_polluters(synonyms_path)
+    syn_index = _synonym_index(syn)
+    occ_rx = {t: _occupancy_regex(_variants_for(t, syn, syn_index), deny)
+              for t in ({r["tag_a"] for r in untapped} | {r["tag_b"] for r in untapped})}
+    cov_note = _coverage_note(coverage, len(games))
+    for r in untapped:
+        occ = occupancy_check(games, r["tag_a"], r["tag_b"], floor=floor,
+                              synonyms=syn, denylist=deny, polluters=pol, regexes=occ_rx)
+        if occ and occ["above_floor"]:
+            r["status"], r["occupancy"] = "OCCUPIED", occ
+        elif occ:
+            r["status"], r["occupancy"] = "OPEN", occ          # only a weak (sub-floor) incumbent
+        else:
+            r["status"], r["occupancy"] = "OPEN", {"none_above_floor": floor}
+        r["coverage_note"] = cov_note
+
     return {"scatter": scatter, "proven": proven, "untapped": untapped,
-            "ingredients": ingredients, "n_games": len(games), "n_tags": len(popular)}
+            "ingredients": ingredients, "n_games": len(games), "n_tags": len(popular),
+            "coverage": coverage or {"corpus_size": len(games)}, "occupancy_floor": floor}
 
 
 # --------------------------------------------------------------------------- #
@@ -1037,14 +1245,24 @@ def write_combos_report(path: str, res: dict):
         lines.append(f"| **{_tag_label(r['tag_a'])} x {_tag_label(r['tag_b'])}** | {r['n_both']} | "
                      f"[{r['best_game'][:32]}]({r['best_url']}) ({r['max_ccu']:,}) | "
                      f"{r['avg_rating'] if r['avg_rating'] is not None else '-'}% | {r['reach']} |")
-    lines += ["", "## Untapped (both tags popular, but never combined in the corpus)",
-              "", "Blue-sky: nobody has shipped these together. Higher risk - could be novel, "
-              "or could be a combo players don't want. Validate before committing.", "",
-              "| Combo | Games tag A | Games tag B |",
-              "|-------|------------|------------|"]
+    lines += ["", "## Untapped (both tags popular, never literally combined - occupancy-checked)",
+              "", "Blue-sky candidates. Each is re-scanned with the synonym map so a clone that "
+              "uses different words still surfaces: **OCCUPIED** means a live incumbent above the "
+              "floor already ships this loop; **OPEN** means none was found. No verdict implies "
+              "\"never built\" - it states the sample it was checked against.", "",
+              "| Combo | #A | #B | Occupancy | Checked |",
+              "|-------|----|----|-----------|---------|"]
     for r in res["untapped"][:20]:
+        occ = r.get("occupancy", {})
+        if r.get("status") == "OCCUPIED":
+            occ_txt = (f"**OCCUPIED** - [{occ.get('incumbent_game')}]({occ.get('incumbent_url', '')}) "
+                       f"@ {occ.get('incumbent_ccu', 0):,} CCU")
+        elif occ.get("incumbent_ccu"):
+            occ_txt = f"OPEN (weak: {occ['incumbent_game']} @ {occ['incumbent_ccu']:,})"
+        else:
+            occ_txt = "OPEN (no incumbent above floor)"
         lines.append(f"| **{_tag_label(r['tag_a'])} x {_tag_label(r['tag_b'])}** | "
-                     f"{r['n_a']} | {r['n_b']} |")
+                     f"{r['n_a']} | {r['n_b']} | {occ_txt} | {r.get('coverage_note', '')} |")
     lines += ["", "## Winning ingredients (tags that over-index among 1k+ CCU games)",
               "", "Lift > 1 means the tag appears more often among winners than in the corpus "
               "at large - the mechanics/themes that correlate with hits right now.", "",
@@ -1065,7 +1283,13 @@ def cmd_harvest(client: RobloxClient, args):
     games = harvest_corpus(client, pages=args.pages)
     out = args.out or os.path.join("data", "corpus.json")
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
-    write_json(games, out, extra={"corpus": True, "seeds": len(MECHANIC_TAGS) + len(THEME_TAGS)})
+    write_json(games, out, extra={
+        "corpus": True,
+        "seeds": len(MECHANIC_TAGS) + len(THEME_TAGS),
+        "feeds": TRENDING_SORTS,
+        "pages": args.pages,
+        "endpoints": ["omni-search", "explore-api/get-sort-content"],
+    })
     print(f"corpus: {len(games)} games -> {out}")
 
 
@@ -1075,13 +1299,17 @@ def cmd_combos(client: RobloxClient, args):
         print("Building corpus (this takes a few minutes)...", file=sys.stderr)
         games = harvest_corpus(client, pages=args.pages)
         os.makedirs(os.path.dirname(corpus_path) or ".", exist_ok=True)
-        write_json(games, corpus_path, extra={"corpus": True})
+        write_json(games, corpus_path, extra={
+            "corpus": True, "feeds": TRENDING_SORTS, "pages": args.pages,
+            "endpoints": ["omni-search", "explore-api/get-sort-content"],
+        })
     else:
         games = load_corpus(corpus_path)
         print(f"Loaded corpus: {len(games)} games from {corpus_path} "
               f"(use --rebuild to refresh)", file=sys.stderr)
 
-    res = analyze_combos(games)
+    res = analyze_combos(games, coverage=load_corpus_meta(corpus_path),
+                         floor=args.occupancy_floor, synonyms_path=args.synonyms)
     print(f"\n{'='*72}\nROBLOX COMBO GAP-FINDER  ({res['n_games']:,} games, {res['n_tags']} popular tags)\n{'='*72}")
     print("\nPROVEN & UNDERBUILT  (a 1.5k+ hit exists, but few games do it):\n")
     print(f"  {'combo':<34}{'#':>3}  {'best game (CCU)':<34}{'reach':>6}")
@@ -1090,10 +1318,17 @@ def cmd_combos(client: RobloxClient, args):
         combo = f"{_tag_label(r['tag_a'])} x {_tag_label(r['tag_b'])}"
         best = f"{r['best_game'][:24]} ({r['max_ccu']:,})"
         print(f"  {combo[:34]:<34}{r['n_both']:>3}  {best:<34}{r['reach']:>6}")
-    print("\nUNTAPPED  (both tags popular, never combined - blue-sky):\n")
+    print("\nUNTAPPED  (both tags popular, never literally combined - occupancy-checked):\n")
     for r in res["untapped"][:args.limit]:
+        occ = r.get("occupancy", {})
+        if r.get("status") == "OCCUPIED":
+            tail = f"OCCUPIED by {occ.get('incumbent_game')} @ {occ.get('incumbent_ccu', 0):,} CCU"
+        elif occ.get("incumbent_ccu"):
+            tail = f"OPEN (weak incumbent {occ['incumbent_game']} @ {occ['incumbent_ccu']:,} CCU)"
+        else:
+            tail = "OPEN (no incumbent above floor)"
         print(f"  {_tag_label(r['tag_a'])} x {_tag_label(r['tag_b'])}"
-              f"   ({r['n_a']} + {r['n_b']} games, 0 combined)")
+              f"   ({r['n_a']} + {r['n_b']} games) - {tail}; untapped {r.get('coverage_note', '')}")
     print("\nWINNING INGREDIENTS  (tags over-indexed among 1k+ CCU games):\n")
     for r in res["ingredients"][:15]:
         print(f"  {r['tag']:<14} {r['kind']:<9} lift {r['lift']:>4}x   "
@@ -1168,6 +1403,32 @@ def selftest():
     assert "genre:Tycoon" in game_tags(tg), "genre_l2 should become a tag"
     assert not _TAG_RE["car"].search("scary card scar"), "short tags must match whole words only"
     assert _redundant("tycoon", "genre:Tycoon"), "synonym tags should be flagged redundant"
+    # semantic occupancy guard (synonym-aware; fixtures only, no live API)
+    syn_t = {"food": ["restaurant", "cook", "recipe"], "rng": ["spin", "dice", "roll"]}
+    occ_games = [
+        _build_game(41, {"playing": 5000, "rootPlaceId": 41, "name": "Spin Dice Restaurant"}, None, None, now),
+        _build_game(42, {"playing": 300, "rootPlaceId": 42, "name": "Tiny Cook Roll"}, None, None, now),
+    ]
+    occ = occupancy_check(occ_games, "food", "rng", floor=1000, synonyms=syn_t)
+    assert occ and occ["above_floor"] and occ["incumbent_ccu"] == 5000, "5k synonym clone -> OCCUPIED"
+    assert occupancy_check(occ_games, "rng", "food", floor=1000, synonyms=syn_t)["incumbent_ccu"] == 5000, \
+        "occupancy_check must be order-independent in (a, b)"
+    weak = occupancy_check([occ_games[1]], "food", "rng", floor=1000, synonyms=syn_t)
+    assert weak and not weak["above_floor"] and weak["incumbent_ccu"] == 300, \
+        "a sub-floor match -> weak incumbent, lane still OPEN"
+    nodesc = _build_game(43, {"playing": 7000, "rootPlaceId": 43, "name": "Spin Restaurant"}, None, None, now)
+    nodesc.description = None
+    assert occupancy_check([nodesc], "food", "rng", floor=1000, synonyms=syn_t)["incumbent_ccu"] == 7000, \
+        "None description must not crash - name-only scan still runs"
+    assert occupancy_check(occ_games, "food", "horror", floor=1000, synonyms=syn_t) is None, \
+        "no semantic match -> None (open)"
+    bleed = [_build_game(44, {"playing": 9000, "rootPlaceId": 44,
+                              "name": "+1 Speed Keyboard Escape | Restaurant Spin"}, None, None, now)]
+    assert occupancy_check(bleed, "food", "rng", floor=1000, synonyms=syn_t, polluters=["keyboard"]) is None, \
+        "known SEO keyword-bleed title must be skipped as an incumbent"
+    note = _coverage_note({"corpus_size": 2872, "generated_utc": "2026-06-16T01:00:00Z"}, 2872)
+    assert "2,872" in note and "2026-06-16" in note, "coverage note must carry sample size + date"
+    assert _coverage_note(None, 0) == "coverage unknown", "missing metadata -> 'coverage unknown', never silent"
     # failure: bad id -> None, empty -> []
     assert c.resolve_universe(0) is None, "invalid place id should resolve to None"
     assert enrich(c, []) == [], "empty discovery should enrich to []"
@@ -1235,6 +1496,10 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--csv", help="write the full tag-pair scatter (reach vs co-occurrence)")
     c.add_argument("--json"); c.add_argument("--report",
                    help="write a markdown ideas report to this path")
+    c.add_argument("--occupancy-floor", type=int, default=OCCUPANCY_FLOOR,
+                   help="CCU at/above which a synonym-matched incumbent marks a combo OCCUPIED (default 1000)")
+    c.add_argument("--synonyms", default=SYNONYMS_PATH,
+                   help="path to the synonym map (default data/synonyms.json; seeded default used if absent)")
     c.set_defaults(func=cmd_combos)
 
     sub.add_parser("selftest", help="hit live endpoints + check analysis math")

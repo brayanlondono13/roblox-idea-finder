@@ -1,0 +1,30 @@
+{
+  "_comment": "Semantic-occupancy synonym map (DATA, not logic). Each canonical key is a vocabulary token from MECHANIC_TAGS/THEME_TAGS in roblox_research.py; its value lists the surface words real Roblox games actually use in their name/description for the SAME concept. occupancy_check() matches any A-variant AND any B-variant (word-boundary, case-insensitive, with plural/verb suffixes) so a clone named with different words (e.g. 'Spin a Baddie' = rng + food) still counts as an incumbent. Edit freely - no code change needed. 'denylist' drops individual variants that cause false positives. Calling occupancy_check with a token that is itself a variant (e.g. 'roll') resolves to its cluster ('rng').",
+  "denylist": [],
+  "polluters": ["keyboard", "+1 speed"],
+  "synonyms": {
+    "food": ["food", "cooking", "cook", "recipe", "dish", "restaurant", "diner", "cafe", "kitchen", "chef", "bistro", "snack", "drink", "boba", "ramen", "lemonade", "bake", "meal", "menu", "burger", "pizza", "sushi", "candy", "chocolate", "dessert", "donut", "cake", "icecream"],
+    "rng": ["rng", "roll", "dice", "gacha", "spin", "hatch", "unbox", "summon", "lucky", "luck", "mutation", "rarity", "crate", "egg", "gift", "jackpot", "wheel"],
+    "merge": ["merge", "fuse", "fusion", "combine", "blend", "mix"],
+    "steal": ["steal", "rob", "snatch", "grab", "heist", "thief", "loot"],
+    "garden": ["garden", "grow", "plant", "farm", "farming", "harvest", "crop", "seed", "greenhouse", "orchard"],
+    "pet": ["pet", "companion", "creature", "critter", "buddy", "minion"],
+    "tycoon": ["tycoon", "empire", "business", "magnate", "mogul", "factory", "shop", "store", "stand"],
+    "simulator": ["simulator", "sim", "simulation"],
+    "clicker": ["clicker", "click", "tap", "idle", "incremental", "afk"],
+    "horror": ["horror", "scary", "creepy", "haunted", "nightmare", "terror", "dread"],
+    "zombie": ["zombie", "undead", "infected", "walker"],
+    "ninja": ["ninja", "shinobi", "samurai", "assassin"],
+    "dragon": ["dragon", "wyvern", "drake"],
+    "fish": ["fish", "fishing", "angler", "catch", "rod"],
+    "mine": ["mine", "mining", "miner", "dig", "digging", "excavate", "ore"],
+    "obby": ["obby", "parkour", "course", "platformer", "jump"],
+    "survive": ["survive", "survival", "survivor", "escape", "flee"],
+    "tower": ["tower", "td", "defense", "defend"],
+    "race": ["race", "racing", "drift", "speed", "drive", "driving"],
+    "anime": ["anime", "manga", "weeb"],
+    "space": ["space", "galaxy", "cosmic", "rocket", "astronaut", "planet"],
+    "car": ["car", "vehicle", "auto", "ride"],
+    "dino": ["dino", "dinosaur", "raptor", "rex", "jurassic"]
+  }
+}
