@@ -116,49 +116,6 @@
       ]
     },
     {
-      "title": "Steal a Brainrot Tycoon: Vault Wars",
-      "tagline": "Build the vault. Steal their brainrots.",
-      "category": "proven",
-      "lane": "steal-brainrot / Tycoon (tycoon x brainrot untapped combo) — OPEN, top niche score 78.9, hot meta",
-      "mechanics": [
-        "roll",
-        "lucky",
-        "build",
-        "defense",
-        "hide"
-      ],
-      "theme": "Brainrot meme characters (the dominant 2026 Roblox meme aesthetic) live in a personal money-printing factory you defend and raid. Goofy, loud, instantly legible to a young audience.",
-      "core_loop": "Roll/hatch a random brainrot unit (common to secret, visible luck stat) -> place it on a conveyor pedestal where it auto-generates offline cash -> spend cash on more pedestals, luck, and DEFENSES (lasers, cages, guards) -> sneak into rivals' bases during a raid window and STEAL their highest-rarity brainrot -> bring it home to boost income -> rebirth for permanent luck/cash multipliers and new themed factory worlds. Steal-and-defend is the retention engine; roll-for-rarity is the dopamine.",
-      "first_30_seconds": "Spawn onto a tiny starter base with one cheap pedestal already printing cash and a giant glowing ROLL button. Tap it, get a goofy brainrot with a number floating over its head, watch cash tick up. A floating arrow points at a neighbor's base: 'STEAL THEIR BRAINROT ->'. You sprint over, grab one, a siren wails, you run home. Roll, place, steal, defend — delivered in 30s.",
-      "depth": "Three interacting systems give a 100+ hour ceiling: economy optimization (which pedestals/luck to invest in), base layout as a defense puzzle (maze guards, hide your best unit), and read-the-lobby raiding (who's AFK, when the window opens). Emergent metagame: steal-alliances and revenge feuds. The defend-vs-greed tension (more printers or more locks?) stays interesting as rarities and counter-defenses escalate.",
-      "why_now": "Steal-brainrot is the single hottest lane in the data: 403,082 de-contaminated Tycoon-lane demand, leader 40.6%, flagged OPEN and 'hot meta' (78.9, top niche score in the brief). tycoon x brainrot is explicitly an UNTAPPED combo (popular, ~never combined). roll 1.21, lucky 1.30, build 1.32, defense 1.53, and hide 1.58 all over-index in 1k+ winners — this loop stacks all five. The steal meta proves players love the raid tension; nobody has fused it with a real offline-tycoon spine.",
-      "incumbent": "'Steal a Brainrot' (genre-defining 40.6% lane leader). Beat it by adding the persistent TYCOON base + RNG-hatch collection dex it lacks — turning a grab-and-run loop into a build-defend-collect game with offline progression that retains non-PvP players.",
-      "differentiation": "Current steal-brainrot games are shallow grab-loops with weak base persistence. This makes your base a real tycoon you grow and defend offline, units a rarity-dex (Slime-RNG style), and adds a defense-layout puzzle. It serves both the PvP raider AND the chill collector — doubling the retained audience.",
-      "retention": "Daily login luck streak, weekly new brainrot rarity drops + new factory world, limited 'heist events' (double-steal weekends), rebirth ladder, collection dex with set bonuses. The steal/defend feud loop is inherently social and self-renewing.",
-      "monetization": "Luck gamepass, auto-collect/auto-roll gamepass, VIP defense slot, limited event-exclusive brainrot gacha, 2x cash and 2x luck (group-friendly), rebirth-skip — all accelerators, none gate the core fun.",
-      "virality": "Steal-and-revenge is intrinsically social (raid friends, they raid back); group luck/cash multipliers reward squads; rare-steal moments are clip-and-thumbnail bait ('I STOLE his SECRET brainrot'). 'Steal a Brainrot' is a proven high-CTR thumbnail formula.",
-      "scope": "L",
-      "confidence": "high",
-      "evidence_games": [
-        {
-          "name": "Steal-brainrot lane leader (de-contaminated)",
-          "ccu": 403082,
-          "note": "Dominant Tycoon-lane demand for the steal meta; leader 40.6%, top niche score 78.9, flagged OPEN and hot. Verified verbatim in brief."
-        },
-        {
-          "name": "tycoon x brainrot combo (untapped)",
-          "ccu": 0,
-          "note": "Listed in UNTAPPED COMBOS: both ingredients popular, ~never combined, zero combined titles. Blue space on a proven-hot meta — no positive proof of fusion yet, only of each half."
-        },
-        {
-          "name": "Run a Restaurant! (offline-serve tycoon proof)",
-          "ccu": 20000,
-          "note": "DERIVED: restaurant 93,182 x 22% and cooking 69,332 x 30% both imply ~19-21k CCU. Proves fresh offline-income tycoons clear 1k fast; the tycoon spine is well-trodden, only the brainrot+steal fusion is new."
-        }
-      ],
-      "risk": "tycoon x brainrot has no proven 1k+ incumbent yet — both halves are proven separately, but the steal/defend + offline-tycoon balance is execution-heavy (scope L), and the brainrot meme trend could cool before launch."
-    },
-    {
       "title": "Hatch a Pet: Roll, Steal & Trade Tycoon",
       "tagline": "Hatch rare pets. Steal your friend's.",
       "category": "emerging",

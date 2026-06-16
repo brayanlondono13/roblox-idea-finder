@@ -457,11 +457,32 @@ def analyze_niche(games: list[Game], query: str) -> dict:
     def _clamp(x, lo=0.0, hi=1.0):
         return max(lo, min(hi, x))
 
+    # ---- dominance guard: is the leader the query's NAMESAKE, dwarfing its real rivals? ----
+    # Genre-anchoring can hide a category-defining giant by padding the lane with big
+    # off-concept same-genre games (e.g. "steal a brainrot" -> the ~133k namesake leader, but
+    # the focused Tycoon lane also counts Kick a Lucky Block / Grow a Garden, so it looks "open").
+    q_tokens = _tokens(query)
+    leader_g = ranked[0] if ranked else None
+    name_frac = ((sum(1 for t in q_tokens if t in leader_g.name.lower()) / len(q_tokens))
+                 if (q_tokens and leader_g) else 0.0)
+    # rivals must echo the concept in their NAME (descriptions SEO-stuff trending terms,
+    # so a name-only match avoids counting off-concept games as real rivals).
+    rivals = [g for g in ranked if g is not leader_g
+              and any(t in g.name.lower() for t in q_tokens)]
+    concept_cliff = (round(leader_g.ccu / rivals[0].ccu, 1)
+                     if (leader_g and rivals and rivals[0].ccu) else None)
+    namesake = name_frac >= 0.6
+    dominated = (bool(leader_g) and leader_g.ccu >= 5000 and namesake
+                 and concept_cliff is not None and concept_cliff >= 3)
+
     # ---- recalibrated scoring on the de-contaminated focused set (max 100) ----
     # DEMAND (0-30): log-linear across 1k -> 1M so it keeps discriminating up high.
     demand_pts = 30.0 * _clamp((math.log10(foc["demand"] + 1) - 3) / 3) if foc["demand"] else 0.0
-    # OPENNESS (0-30): low concentration == room to enter. Punishes monoliths.
+    # OPENNESS (0-30): low concentration == room to enter. Punishes monoliths AND
+    # namesake-dominated lanes (you would be cloning the category leader head-on).
     openness_pts = max(0.0, 30.0 * (1 - max(ls, hhi / 10000)))
+    if dominated:
+        openness_pts = min(openness_pts, 6.0)
     # REACHABILITY (0-20): how many independent ~1k+ winners exist (soft-banded).
     winners_pts = min(20.0, 2.5 * sum(_winner_credit(g.ccu) for g in foc["live"]))
     # FRESHNESS (0-15): niche still launches winners -> a newcomer can too.
@@ -480,6 +501,13 @@ def analyze_niche(games: list[Game], query: str) -> dict:
         verdict = (f"MONOLITH - '{lname}' owns {ls*100:.0f}% of live players in the "
                    f"{dominant_genre or 'niche'} lane. Hard to displace head-on; "
                    f"differentiate hard or pick a sub-niche.")
+    elif dominated:
+        cliff_txt = (f"~{concept_cliff:g}x the next on-topic game" if concept_cliff
+                     else "with no real rival in sight")
+        verdict = (f"DOMINATED - '{lname}' IS this space ({leader_g.ccu:,} CCU, {cliff_txt}). "
+                   f"The lane only looks open because same-genre games unrelated to your concept "
+                   f"pad it. Building a variant means cloning the category leader head-on - take "
+                   f"the MECHANIC into an open theme instead.")
     elif len(foc["fresh"]) >= 1:
         verdict = (f"OPEN & PROVEN - fragmented (top game {ls*100:.0f}%) AND "
                    f"{len(foc['fresh'])} game(s) hit 1k+ in the last {FRESH_DAYS}d. "
@@ -506,6 +534,10 @@ def analyze_niche(games: list[Game], query: str) -> dict:
         "top3_share_pct": round(foc["top3_share"] * 100, 1),
         "hhi": hhi,
         "stale_leaders": [g.name for g in stale_leaders],
+        # ---- dominance guard ----
+        "namesake_leader": namesake,
+        "concept_cliff": concept_cliff,           # leader CCU / next on-topic rival CCU
+        "dominated": dominated,
         # ---- raw keyword cluster (for transparency / contamination check) ----
         "cluster_demand_ccu": clu["demand"],
         "cluster_leader": clu["ranked"][0].name if clu["ranked"] else None,
@@ -912,6 +944,10 @@ def cmd_niche(client: RobloxClient, args):
     print(f"1k+ winners       : {a['winners_1k']}   (fresh <{FRESH_DAYS}d: {a['fresh_winners_1k']})")
     print(f"Lane leader       : {a['leader']}  {a['leader_ccu']:,} CCU "
           f"({a['leader_share_pct']}% share)   HHI={a['hhi']}")
+    if a.get("dominated"):
+        print(f"  !! DOMINATED: '{a['leader']}' is the namesake category leader"
+              + (f" ({a['concept_cliff']:g}x the next on-topic game)" if a['concept_cliff'] else "")
+              + " - cloning it head-on is the trap, not the opportunity.")
     focus_games, _ = _focus_set([g for g in games if g.ccu > 0], args.query)
     focus_games.sort(key=lambda g: g.ccu, reverse=True)
     print(f"\nTop competitors (focused lane):\n")
@@ -1112,6 +1148,17 @@ def selftest():
     assert am["demand_ccu"] == 8000, "focused demand must exclude the off-topic 60k padder"
     assert am["cluster_demand_ccu"] == 68000 and am["contamination_pct"] > 80, "cluster must show the bleed"
     assert am["leader"] == "Cook Tycoon", "lane leader is the focused leader, not the padder"
+    assert not am["dominated"], "cooking leader is not the query namesake -> not dominated"
+    # dominance guard: a namesake giant + a cliff to tiny clones must read DOMINATED, not OPEN
+    dom = [
+        _build_game(31, {"playing": 50000, "rootPlaceId": 31, "name": "Steal a Brainrot", "genre_l2": "Tycoon"}, None, None, now),
+        _build_game(32, {"playing": 40000, "rootPlaceId": 32, "name": "Big Tycoon Game", "genre_l2": "Tycoon"}, None, None, now),
+        _build_game(33, {"playing": 1000, "rootPlaceId": 33, "name": "Brainrot Clone", "genre_l2": "Tycoon"}, None, None, now),
+        _build_game(34, {"playing": 800, "rootPlaceId": 34, "name": "Steal Brainrot Mini", "genre_l2": "Tycoon"}, None, None, now),
+    ]
+    ad = analyze_niche(dom, "steal brainrot")
+    assert ad["dominated"] and "DOMINATED" in ad["verdict"], "namesake giant + cliff should read DOMINATED"
+    assert ad["concept_cliff"] and ad["concept_cliff"] >= 3, "cliff to next on-topic rival should be large"
     # helper math
     assert _stem("cooking") == "cook" and _stem("food") == "food", "stemmer"
     assert _winner_credit(400) == 0 and _winner_credit(1000) == 0.5 and _winner_credit(1500) == 1.0, "soft 1k band"
