@@ -1,14 +1,15 @@
-name: Refresh Roblox dashboard
+name: Refresh Roblox dashboard (best-effort)
 
-# Re-harvest live Roblox data daily and rebuild the public dashboard.
-# Runs on a schedule + on-demand (Actions tab -> Run workflow).
+# NOTE: Roblox blocks most datacenter IPs (incl. GitHub-hosted runners), so this
+# CI harvest often gets rate-limited and finds too few games. The RELIABLE daily
+# refresh runs on your own machine via the scheduled task (see update.ps1 / README).
+# This workflow is kept as a manual, failure-proof fallback: it only rebuilds and
+# commits when the harvest actually pulled a healthy number of games.
 on:
-  schedule:
-    - cron: '17 9 * * *'      # ~09:17 UTC daily
   workflow_dispatch:
 
 permissions:
-  contents: write              # allow the action to commit the refreshed site
+  contents: write
 
 concurrency:
   group: refresh
@@ -20,28 +21,34 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Harvest fresh data + rebuild dashboard
+      - name: Harvest (tolerant) + rebuild only if healthy
         run: |
-          python roblox_research.py --sleep 0.6 harvest --pages 1 --out data/corpus.json
+          python roblox_research.py --sleep 0.6 harvest --pages 1 --out data/corpus.fresh.json || true
+          COUNT=$(python -c "import json;print(json.load(open('data/corpus.fresh.json'))['count'])" 2>/dev/null || echo 0)
+          echo "harvested $COUNT games"
+          if [ "$COUNT" -lt 800 ]; then
+            echo "::warning::Only $COUNT games (Roblox likely blocked this runner's IP). Skipping rebuild."
+            exit 0
+          fi
+          mv data/corpus.fresh.json data/corpus.json
           python roblox_research.py combos --corpus data/corpus.json --json data/combos.json
           python roblox_viz.py --corpus data/corpus.json --out docs/index.html
 
-      - name: Commit refreshed site
+      - name: Commit if changed
         run: |
+          rm -f data/corpus.fresh.json
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/index.html data/corpus.json data/combos.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: daily Roblox data refresh [skip ci]"
+            git commit -m "chore: Roblox data refresh (CI) [skip ci]"
             git push
           fi

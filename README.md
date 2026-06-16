@@ -11,8 +11,26 @@ single monolith.
 The dashboard's **Recommended Games** tab is the headline: ranked "build this now" cards
 (click for the full brief — core loop, the 30-second hook, why-now evidence, the incumbent
 to beat, monetization, virality), plus a live "Right Now" strip (open lanes, newest 1k+
-winners, hot combos) that recomputes from fresh data on every refresh. A GitHub Action
-re-harvests Roblox daily and rebuilds the site automatically.
+winners, hot combos) that recomputes from fresh data on every refresh.
+
+## Keeping it updated (daily)
+
+Roblox blocks most **datacenter IPs** (incl. GitHub's CI runners), so the reliable refresh
+runs on **your machine** (residential IP) and pushes — GitHub Pages serves it within ~1 min.
+
+```powershell
+# one-time: schedule a daily refresh at 9am
+powershell -ExecutionPolicy Bypass -File install_scheduler.ps1
+# or refresh on demand any time:
+powershell -ExecutionPolicy Bypass -File update.ps1
+```
+
+`update.ps1` re-harvests live data → recomputes combos → rebuilds `docs/index.html` → commits
++ pushes. The data charts and the "Right Now" strip update automatically; the curated
+**Recommended Games** cards refresh when you re-run the synthesis (ask Claude, or it stays as
+last generated in `data/recommendations.json`). There's also a manual, best-effort GitHub
+Action (Actions tab → "Refresh Roblox dashboard" → Run workflow) that only commits if the CI
+harvest wasn't IP-blocked.
 
 Built for the workflow: _"I like games like **Slime RNG** and **Craft/Cooking**
 games — show me the competitors, the genres, what's hot, and where the open lanes

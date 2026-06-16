@@ -604,19 +604,29 @@ def harvest_corpus(client: RobloxClient, pages: int = 1, extra_seeds: list[str] 
     """Build a broad Roblox 'catalog': union omni-search over the whole mechanic/theme
     vocabulary plus every trending feed, then enrich. Returns deduped Game objects."""
     raw_by_id: dict[int, dict] = {}
+    blocked = 0
     for sid in TRENDING_SORTS:                       # the current hits
-        for c in client.sort_content(sid):
-            uid = c.get("universeId")
-            if uid:
-                raw_by_id.setdefault(uid, c)
+        try:
+            for c in client.sort_content(sid):
+                uid = c.get("universeId")
+                if uid:
+                    raw_by_id.setdefault(uid, c)
+        except RuntimeError:
+            blocked += 1
     seeds = list(dict.fromkeys(MECHANIC_TAGS + THEME_TAGS + (extra_seeds or [])))
     for i, kw in enumerate(seeds, 1):
-        for c in client.omni_search(kw, pages=pages):
-            uid = c.get("universeId")
-            if uid:
-                raw_by_id.setdefault(uid, c)
+        try:                                         # one blocked seed must not kill the harvest
+            for c in client.omni_search(kw, pages=pages):
+                uid = c.get("universeId")
+                if uid:
+                    raw_by_id.setdefault(uid, c)
+        except RuntimeError:
+            blocked += 1
         if i % 15 == 0:
             print(f"  ...{i}/{len(seeds)} seeds scanned, {len(raw_by_id)} unique games", file=sys.stderr)
+    if blocked:
+        print(f"  ! {blocked} search/feed calls were rate-limited and skipped "
+              f"(common from datacenter IPs - run from a residential connection)", file=sys.stderr)
     print(f"  enriching {len(raw_by_id)} games...", file=sys.stderr)
     return enrich(client, list(raw_by_id.values()))
 
