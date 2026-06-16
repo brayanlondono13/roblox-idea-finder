@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:#08090C; }
+  ::selection{ background:rgba(77,124,254,0.32); color:#fff; }
+  .rif-scroll::-webkit-scrollbar{ width:9px; height:9px; }
+  .rif-scroll::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.12); border-radius:9px; }
+  .rif-scroll::-webkit-scrollbar-track{ background:transparent; }
+  @keyframes rifFade{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none;} }
+</style>
+</helmet>
+
+<div style="display:flex; height:100vh; overflow:hidden; background:#08090C; background-image:radial-gradient(rgba(255,255,255,0.022) 1px, transparent 1px); background-size:30px 30px; color:#E9ECF1; font-family:'IBM Plex Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <!-- ============ LEFT NAV RAIL ============ -->
+  <aside class="rif-scroll" style="height:100%; width:248px; flex:none; border-right:1px solid rgba(255,255,255,0.07); background:rgba(10,11,14,0.72); backdrop-filter:blur(8px); overflow-y:auto; padding:22px 18px 40px; display:flex; flex-direction:column; gap:4px;">
+    <div style="display:flex; align-items:center; gap:9px; padding:0 6px 14px; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div style="width:26px; height:26px; border-radius:7px; background:linear-gradient(135deg,#4D7CFE,#7B5BFF); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:#fff; box-shadow:0 0 0 1px rgba(77,124,254,0.4), 0 4px 14px rgba(77,124,254,0.3);">◆</div>
+      <div style="line-height:1.1;">
+        <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; letter-spacing:-0.01em;">Idea Finder</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.13em; color:#5B6472; text-transform:uppercase;">Redesign · v1</div>
+      </div>
+    </div>
+
+    <a href="#overview" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#4D7CFE;">00</span> Overview</a>
+    <a href="#critique" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">01</span> Honest critique</a>
+    <a href="#ia" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">02</span> Information architecture</a>
+    <a href="#system" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">03</span> Visual system</a>
+    <a href="#cards" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">04</span> Recommended cards</a>
+    <a href="#brief" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">05</span> The build brief</a>
+    <a href="#map" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">06</span> Opportunity Map</a>
+    <a href="#views" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">07</span> Other views</a>
+    <a href="#states" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">08</span> Empty & live states</a>
+    <a href="#responsive" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">09</span> Responsive & a11y</a>
+    <a href="#plan" style="display:flex; gap:10px; align-items:baseline; padding:8px 8px; border-radius:7px; text-decoration:none; color:#A6ADBA; font-size:13px;" style-hover="background:rgba(255,255,255,0.04); color:#E9ECF1;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">10</span> Change list</a>
+
+    <div style="margin-top:auto; padding:14px 8px 0; border-top:1px solid rgba(255,255,255,0.06);">
+      <a href="#ship" style="display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:9px; background:rgba(63,185,80,0.10); border:1px solid rgba(63,185,80,0.3); text-decoration:none; color:#7EE291; font-size:12.5px; font-weight:600;" style-hover="background:rgba(63,185,80,0.16);">→ Ship this first</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN COLUMN ============ -->
+  <main class="rif-scroll" style="flex:1; min-width:0; height:100%; overflow-y:auto; padding:0 56px 140px;">
+    <div style="max-width:1080px; margin:0 auto;">
+
+    <!-- ====== HEADER / OVERVIEW ====== -->
+    <section id="overview" style="scroll-margin-top:24px; padding:64px 0 40px;">
+      <div style="display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#5B6472; margin-bottom:22px;">
+        <span style="color:#4D7CFE;">Design proposal</span>
+        <span style="opacity:0.4;">/</span>
+        <span>Roblox Idea Finder</span>
+        <span style="margin-left:auto; display:inline-flex; align-items:center; gap:6px; color:#7EE291;"><span style="width:7px; height:7px; border-radius:50%; background:#3FB950; box-shadow:0 0 8px #3FB950;"></span>2,886 games · live</span>
+      </div>
+
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:52px; line-height:1.04; letter-spacing:-0.025em; margin:0 0 22px; max-width:18ch; animation:rifFade 0.7s cubic-bezier(0.16,1,0.3,1) both;">A quant's edge on a chaotic market.</h1>
+      <p style="font-size:18px; line-height:1.6; color:#A6ADBA; max-width:62ch; margin:0 0 36px;">Today the tool shows you <em style="color:#E9ECF1; font-style:normal;">everything</em>. It should tell you <em style="color:#E9ECF1; font-style:normal;">what to build right now</em> — then let you validate it in the data. This is a redesign that leads with the answer, treats numbers as evidence, and makes the signature Opportunity Map readable in one glance. Dark, dense, terminal-grade. Built for one indie dev who moves fast.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:8px;">
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px 18px 16px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">The job</div>
+          <div style="font-size:14px; line-height:1.45; color:#D4D9E1;">"Show me a proven, open opportunity — and let me trust it fast."</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px 18px 16px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">The flow</div>
+          <div style="font-size:14px; line-height:1.45; color:#D4D9E1;"><span style="color:#4D7CFE;">Decide</span> → <span style="color:#3FB950;">Validate</span> → <span style="color:#E0A040;">Explore</span></div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px 18px 16px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">Constraint</div>
+          <div style="font-size:14px; line-height:1.45; color:#D4D9E1;">One offline <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#9FB4D6;">index.html</span> · vanilla JS / canvas / SVG.</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px 18px 16px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">Refreshes</div>
+          <div style="font-size:14px; line-height:1.45; color:#D4D9E1;">Daily — so the design must survive <span style="color:#E9ECF1;">changing numbers & empty lanes</span>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 01 · CRITIQUE ====== -->
+    <section id="critique" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">01</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">An honest critique</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 8px;">The current build is impressively data-rich and the underlying idea — "popular ingredients rarely combined" — is genuinely sharp. The problem is hierarchy: <strong style="color:#E9ECF1; font-weight:600;">everything is the same size, the same weight, the same gray.</strong> Attention has nowhere to land. Here's where it goes wrong, view by view.</p>
+
+      <!-- Verdict strip -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:28px 0 40px;">
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-left:2px solid #3FB950; border-radius:0 12px 12px 0; padding:16px 18px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#3FB950; margin-bottom:8px;">What's working</div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">The thesis. Real CCU evidence. Daily freshness. The Opportunity Map concept is a legitimately novel, defensible viz.</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-left:2px solid #E0A040; border-radius:0 12px 12px 0; padding:16px 18px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E0A040; margin-bottom:8px;">What's underwhelming</div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">No #1. The hero pick reads like row one of a list. Confidence, scope & risk are flat equal-weight pills.</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-left:2px solid #E5484D; border-radius:0 12px 12px 0; padding:16px 18px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E5484D; margin-bottom:8px;">What's broken</div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">The Map's payoff — "bottom-right = opportunity" — is hidden in a caption. The chart never points at an answer.</div>
+        </div>
+      </div>
+
+      <!-- Annotated: Recommended Games -->
+      <div style="display:grid; grid-template-columns:1.35fr 1fr; gap:30px; align-items:start; margin-bottom:44px;">
+        <div style="position:relative;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">Current — Recommended Games</div>
+          <div style="position:relative; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 18px 50px rgba(0,0,0,0.5);">
+            <img src="uploads/pasted-1781579933225-0.png" alt="Current Recommended Games tab" style="width:100%; display:block; filter:saturate(0.9);">
+            <div style="position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.4);"></div>
+            <span style="position:absolute; left:3.5%; top:15.5%; width:24px; height:24px; border-radius:50%; background:#E5484D; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(229,72,77,0.25), 0 2px 8px rgba(0,0,0,0.5);">1</span>
+            <span style="position:absolute; left:3.5%; top:25.5%; width:24px; height:24px; border-radius:50%; background:#E0A040; color:#1a1206; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(224,160,64,0.25), 0 2px 8px rgba(0,0,0,0.5);">2</span>
+            <span style="position:absolute; left:3.5%; top:26.5%; left:6%; top:26.8%; width:24px; height:24px; border-radius:50%; background:#4D7CFE; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(77,124,254,0.25), 0 2px 8px rgba(0,0,0,0.5);">3</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px; padding-top:30px;">
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#E5484D; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">1</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">The hero pick isn't a hero</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">"#1" is tiny gray text in a six-up grid of identical cards. Nothing says <em style="color:#C4CAD4; font-style:normal;">this is the one</em>.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#E0A040; color:#1a1206; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">2</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">The meta line is a run-on</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">"#1 · cooking / food-stand (Tycoon) — OPEN, leader ~22-30%" packs category, lane status, and leader share into one gray sentence. The decisive fact (<strong style="color:#3FB950; font-weight:600;">OPEN</strong>) is buried.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#4D7CFE; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">3</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">Trust signals are flattened</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">"proven / high confidence / scope M" are three identical pills. Confidence (how much to trust this) and scope (how big a build) are different axes and should look different.</div></div></div>
+          <div style="font-size:12.5px; line-height:1.5; color:#6B7382; padding:12px 14px; background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.1); border-radius:9px;">Also: briefs truncate mid-word ("…multi…") with no affordance that a card opens a full brief. Descriptions and pitch lines compete for the same emphasis.</div>
+        </div>
+      </div>
+
+      <!-- Annotated: Opportunity Map -->
+      <div style="display:grid; grid-template-columns:1.35fr 1fr; gap:30px; align-items:start;">
+        <div style="position:relative;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">Current — Opportunity Map</div>
+          <div style="position:relative; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 18px 50px rgba(0,0,0,0.5);">
+            <img src="uploads/pasted-1781579946288-0.png" alt="Current Opportunity Map tab" style="width:100%; display:block; filter:saturate(0.9);">
+            <span style="position:absolute; right:4%; top:20%; width:24px; height:24px; border-radius:50%; background:#E5484D; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(229,72,77,0.25), 0 2px 8px rgba(0,0,0,0.5);">4</span>
+            <span style="position:absolute; left:30%; bottom:14%; width:24px; height:24px; border-radius:50%; background:#E0A040; color:#1a1206; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(224,160,64,0.25), 0 2px 8px rgba(0,0,0,0.5);">5</span>
+            <span style="position:absolute; left:11%; top:33%; width:24px; height:24px; border-radius:50%; background:#4D7CFE; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px rgba(77,124,254,0.25), 0 2px 8px rgba(0,0,0,0.5);">6</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px; padding-top:30px;">
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#E5484D; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">4</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">The answer is in a footnote</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">"Opportunities live in the bottom-right" sits in gray caption text <em style="font-style:normal; color:#C4CAD4;">below</em> the chart. The chart itself never labels its quadrants or highlights the good zone.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#E0A040; color:#1a1206; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">5</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">"Down is good" fights intuition</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">Orange opportunity dots pile into a flat band at the bottom. We read charts up-and-right as "better" — so the best ideas sit where the eye expects the <em style="font-style:normal; color:#C4CAD4;">worst</em>.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; width:22px; height:22px; border-radius:50%; background:#4D7CFE; color:#fff; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;">6</span><div><div style="font-size:14px; font-weight:600; color:#E9ECF1; margin-bottom:3px;">Every dot looks equal</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">~600 points, no callouts, no ranking, unlabeled axes. It's a beautiful cloud that doesn't say "build <em style="font-style:normal; color:#C4CAD4;">this</em>." The half-empty top-left is wasted ink.</div></div></div>
+          <div style="font-size:12.5px; line-height:1.5; color:#6B7382; padding:12px 14px; background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.1); border-radius:9px;"><strong style="color:#9098A6;">Game Universe (t-SNE):</strong> pretty, but un-actionable — distances are arbitrary and clusters are unlabeled. <strong style="color:#9098A6;">Winning Ingredients:</strong> bars with no 1.0× baseline hide the very thing that defines a "winner." <strong style="color:#9098A6;">Tables:</strong> fine, but disconnected from the cards they should feed.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 02 · INFORMATION ARCHITECTURE ====== -->
+    <section id="ia" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">02</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Information architecture</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 30px;">One narrative, three acts. The default view answers the question; the data views exist to <em style="color:#E9ECF1; font-style:normal;">validate</em> the answer; the maps are for open-ended exploration. Same six datasets — re-sequenced so the user never starts at a chart.</p>
+
+      <!-- Three-act flow -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px;">
+        <div style="background:linear-gradient(180deg,rgba(77,124,254,0.07),transparent); border:1px solid rgba(77,124,254,0.25); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#4D7CFE;">01</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#4D7CFE;">Decide</span></div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:600; margin-bottom:6px;">What to build now</div>
+          <div style="font-size:13px; line-height:1.5; color:#9098A6; margin-bottom:14px;">The default landing. Ranked picks + live "Right Now" signals.</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">★ Recommended Games <span style="color:#5B6472;">(hero)</span></div>
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">⚡ Right Now strip</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(180deg,rgba(63,185,80,0.06),transparent); border:1px solid rgba(63,185,80,0.22); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#3FB950;">02</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#3FB950;">Validate</span></div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:600; margin-bottom:6px;">Is the data behind it?</div>
+          <div style="font-size:13px; line-height:1.5; color:#9098A6; margin-bottom:14px;">Reachable from any pick. Prove the lane is open & the ingredients win.</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">◇ Opportunity Map</div>
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">▮ Winning Ingredients</div>
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">▤ Combo tables</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(180deg,rgba(224,160,64,0.06),transparent); border:1px solid rgba(224,160,64,0.22); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#E0A040;">03</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#E0A040;">Explore</span></div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:600; margin-bottom:6px;">Wander the market</div>
+          <div style="font-size:13px; line-height:1.5; color:#9098A6; margin-bottom:14px;">Open-ended. For when you want to find your own angle.</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="font-size:12.5px; color:#C4CAD4; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px;">◷ Game Universe map</div>
+            <div style="font-size:12.5px; color:#5B6472; padding:7px 10px; background:rgba(255,255,255,0.02); border-radius:7px; font-style:italic;">future: saved ideas / watchlist</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Default view wireframe -->
+      <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:30px; align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:10px;">Default view — skeleton</div>
+          <div style="background:#0C0E13; border:1px solid rgba(255,255,255,0.09); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:8px; align-items:center;">
+              <div style="height:26px; flex:1; border-radius:6px; background:rgba(77,124,254,0.14); border:1px dashed rgba(77,124,254,0.4); display:flex; align-items:center; padding:0 10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#86A8FF;">Recommended</div>
+              <div style="height:26px; width:90px; border-radius:6px; border:1px dashed rgba(255,255,255,0.14);"></div>
+              <div style="height:26px; width:90px; border-radius:6px; border:1px dashed rgba(255,255,255,0.14);"></div>
+              <div style="height:26px; width:70px; border-radius:6px; border:1px dashed rgba(255,255,255,0.14);"></div>
+            </div>
+            <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
+              <div style="height:138px; border-radius:9px; border:1px dashed rgba(229,72,77,0.45); background:rgba(229,72,77,0.05); display:flex; flex-direction:column; justify-content:flex-end; padding:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#E5484D;">#01 — HERO PICK</span><span style="font-size:11px; color:#6B7382;">build this now · brief inline</span></div>
+              <div style="display:flex; flex-direction:column; gap:10px;"><div style="flex:1; border-radius:9px; border:1px dashed rgba(255,255,255,0.16); display:flex; align-items:flex-end; padding:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B7382;">#02</span></div><div style="flex:1; border-radius:9px; border:1px dashed rgba(255,255,255,0.16); display:flex; align-items:flex-end; padding:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B7382;">#03</span></div></div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;"><div style="height:48px; border-radius:9px; border:1px dashed rgba(63,185,80,0.4); background:rgba(63,185,80,0.05); display:flex; align-items:center; padding:0 10px;"><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#7EE291;">⚡ OPEN LANES</span></div><div style="height:48px; border-radius:9px; border:1px dashed rgba(255,255,255,0.14);"></div><div style="height:48px; border-radius:9px; border:1px dashed rgba(255,255,255,0.14);"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4;"><strong style="color:#fff; font-weight:600;">Lead with #1.</strong> The top pick gets a full-width hero with its brief readable inline — no click required to see why it's the call.</div>
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4;"><strong style="color:#fff; font-weight:600;">Signals stay above the fold.</strong> The "Right Now" strip (open lanes, fresh winners) is the live pulse — it earns a permanent spot, not a sub-tab.</div>
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4;"><strong style="color:#fff; font-weight:600;">Tabs become acts.</strong> Rename + reorder the nav to read <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#9FB4D6;">Decide · Validate · Explore</span> so the IA itself teaches the workflow.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 03 · VISUAL SYSTEM ====== -->
+    <section id="system" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">03</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Visual system</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 30px;">A terminal, not a toy. One chromatic UI accent (signal blue), a strict semantic palette for opportunity / caution / risk, and a categorical ramp tuned to survive color blindness. Numbers are monospaced and tabular so columns line up like a trading screen.</p>
+
+      <!-- Semantic palette -->
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Semantic color · meaning is fixed</div>
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:34px;">
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden; background:#101218;"><div style="height:62px; background:#4D7CFE;"></div><div style="padding:11px 12px;"><div style="font-size:12.5px; font-weight:600; color:#E9ECF1;">Primary</div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#6B7382; margin-top:2px;">#4D7CFE</div><div style="font-size:10.5px; color:#7A8290; margin-top:5px;">UI accent, links, focus</div></div></div>
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden; background:#101218;"><div style="height:62px; background:#3FB950;"></div><div style="padding:11px 12px;"><div style="font-size:12.5px; font-weight:600; color:#E9ECF1;">Opportunity</div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#6B7382; margin-top:2px;">#3FB950</div><div style="font-size:10.5px; color:#7A8290; margin-top:5px;">open lane, proven+underbuilt</div></div></div>
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden; background:#101218;"><div style="height:62px; background:#E0A040;"></div><div style="padding:11px 12px;"><div style="font-size:12.5px; font-weight:600; color:#E9ECF1;">Caution</div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#6B7382; margin-top:2px;">#E0A040</div><div style="font-size:10.5px; color:#7A8290; margin-top:5px;">aging evidence, med confidence</div></div></div>
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden; background:#101218;"><div style="height:62px; background:#E5484D;"></div><div style="padding:11px 12px;"><div style="font-size:12.5px; font-weight:600; color:#E9ECF1;">Risk</div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#6B7382; margin-top:2px;">#E5484D</div><div style="font-size:10.5px; color:#7A8290; margin-top:5px;">biggest risk, dominated lane</div></div></div>
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden; background:#101218;"><div style="height:62px; background:#7B5BFF;"></div><div style="padding:11px 12px;"><div style="font-size:12.5px; font-weight:600; color:#E9ECF1;">Bold / new</div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#6B7382; margin-top:2px;">#7B5BFF</div><div style="font-size:10.5px; color:#7A8290; margin-top:5px;">bold bets, fresh winner tag</div></div></div>
+      </div>
+
+      <!-- Surfaces + categorical -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:34px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Surfaces · dark ramp</div>
+          <div style="display:flex; flex-direction:column; border:1px solid rgba(255,255,255,0.08); border-radius:11px; overflow:hidden;">
+            <div style="background:#08090C; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;"><span style="font-size:12.5px; color:#C4CAD4;">Page</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B7382;">#08090C</span></div>
+            <div style="background:#101218; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);"><span style="font-size:12.5px; color:#C4CAD4;">Panel</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B7382;">#101218</span></div>
+            <div style="background:#171A21; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);"><span style="font-size:12.5px; color:#C4CAD4;">Raised</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B7382;">#171A21</span></div>
+            <div style="background:#101218; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);"><span style="font-size:12.5px; color:#C4CAD4;">Hairline border</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B7382;">#fff @ 8%</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Genre categories · color-blind safe (Okabe–Ito)</div>
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#56B4E9;"></span><span style="font-size:12px; color:#C4CAD4;">Simulation</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#009E73;"></span><span style="font-size:12px; color:#C4CAD4;">Obby</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#E69F00;"></span><span style="font-size:12px; color:#C4CAD4;">Survival</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#CC79A7;"></span><span style="font-size:12px; color:#C4CAD4;">Roleplay</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#D55E00;"></span><span style="font-size:12px; color:#C4CAD4;">Action</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#0072B2;"></span><span style="font-size:12px; color:#C4CAD4;">RPG</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#F0E442;"></span><span style="font-size:12px; color:#C4CAD4;">Party</span></div>
+            <div style="display:flex; align-items:center; gap:7px; padding:6px 11px 6px 8px; background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:999px;"><span style="width:13px; height:13px; border-radius:50%; background:#94A3B8;"></span><span style="font-size:12px; color:#C4CAD4;">Other</span></div>
+          </div>
+          <div style="font-size:12px; line-height:1.5; color:#7A8290; margin-top:14px;">Eight hues max, each separable under protanopia & deuteranopia. Beyond eight genres, collapse the tail into <span style="color:#94A3B8;">Other</span> rather than recycling hues.</div>
+        </div>
+      </div>
+
+      <!-- Type -->
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Typography · three roles</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:14px;">
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px;">
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:34px; font-weight:700; letter-spacing:-0.02em; line-height:1;">Aa</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; margin:12px 0 4px;">Space Grotesk</div>
+          <div style="font-size:12px; color:#7A8290; line-height:1.5;">Display & headings. Geometric, a little technical. Sizes 18–52px, weights 500–700.</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px;">
+          <div style="font-family:'IBM Plex Sans',sans-serif; font-size:34px; font-weight:500; line-height:1;">Aa</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; margin:12px 0 4px;">IBM Plex Sans</div>
+          <div style="font-size:12px; color:#7A8290; line-height:1.5;">Body & UI copy. Calm, legible at 13–16px. Not Inter — reads more "instrument".</div>
+        </div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:600; line-height:1; font-variant-numeric:tabular-nums;">07</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; margin:12px 0 4px;">JetBrains Mono</div>
+          <div style="font-size:12px; color:#7A8290; line-height:1.5;">All numerals, ranks, CCU, deltas, eyebrows. <span style="font-family:'JetBrains Mono',monospace; color:#9FB4D6;">tabular-nums</span> so columns align.</div>
+        </div>
+      </div>
+
+      <!-- Spacing + radii -->
+      <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:30px; margin-top:20px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Spacing · 4px base</div>
+          <div style="display:flex; align-items:flex-end; gap:10px;">
+            <div style="text-align:center;"><div style="width:4px; height:4px; background:#4D7CFE; border-radius:2px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">4</span></div>
+            <div style="text-align:center;"><div style="width:8px; height:8px; background:#4D7CFE; border-radius:2px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">8</span></div>
+            <div style="text-align:center;"><div style="width:12px; height:12px; background:#4D7CFE; border-radius:2px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">12</span></div>
+            <div style="text-align:center;"><div style="width:16px; height:16px; background:#4D7CFE; border-radius:3px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">16</span></div>
+            <div style="text-align:center;"><div style="width:24px; height:24px; background:#4D7CFE; border-radius:4px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">24</span></div>
+            <div style="text-align:center;"><div style="width:32px; height:32px; background:#4D7CFE; border-radius:5px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">32</span></div>
+            <div style="text-align:center;"><div style="width:48px; height:48px; background:#4D7CFE; border-radius:6px; margin:0 auto 6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382;">48</span></div>
+          </div>
+          <div style="font-size:12.5px; line-height:1.5; color:#7A8290; margin-top:16px;">Dense by default — card padding 16–20px, section rhythm 48px. This is an instrument; whitespace is earned, not sprayed.</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:14px;">Radii</div>
+          <div style="display:flex; gap:10px; align-items:flex-end;">
+            <div style="text-align:center;"><div style="width:46px; height:34px; background:#171A21; border:1px solid rgba(255,255,255,0.12); border-radius:6px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382; display:block; margin-top:6px;">6 chip</span></div>
+            <div style="text-align:center;"><div style="width:46px; height:34px; background:#171A21; border:1px solid rgba(255,255,255,0.12); border-radius:9px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382; display:block; margin-top:6px;">9 ctrl</span></div>
+            <div style="text-align:center;"><div style="width:46px; height:34px; background:#171A21; border:1px solid rgba(255,255,255,0.12); border-radius:14px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382; display:block; margin-top:6px;">14 card</span></div>
+            <div style="text-align:center;"><div style="width:46px; height:34px; background:#171A21; border:1px solid rgba(255,255,255,0.12); border-radius:999px;"></div><span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#6B7382; display:block; margin-top:6px;">pill</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 04 · RECOMMENDED CARDS ====== -->
+    <section id="cards" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">04</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">The hero experience</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 12px;">Medium-fidelity. One <strong style="color:#E9ECF1; font-weight:600;">hero pick</strong> gets a full-width card with its thesis, live evidence, confidence, scope and risk legible at a glance — no click to understand the call. #2–#6 sit below as a tighter grid. The "Right Now" strip is permanent.</p>
+      <div style="display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#5B6472; margin-bottom:22px;"><span style="width:8px;height:8px;border-radius:2px;background:#4D7CFE;"></span>mockup — rendered in the proposed system</div>
+
+      <!-- ===== Decide screen frame ===== -->
+      <div style="background:#0A0B0E; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,0.55);">
+        <!-- frame top bar -->
+        <div style="display:flex; align-items:center; gap:14px; padding:13px 18px; border-bottom:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.015);">
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#4D7CFE,#7B5BFF);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:#fff;">◆</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;">Roblox Idea Finder</span></div>
+          <div style="display:flex; gap:4px; margin-left:8px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 12px; border-radius:7px; background:rgba(77,124,254,0.16); color:#86A8FF; border:1px solid rgba(77,124,254,0.3);">Decide</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 12px; border-radius:7px; color:#7A8290;">Validate</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 12px; border-radius:7px; color:#7A8290;">Explore</span>
+          </div>
+          <div style="margin-left:auto; display:flex; align-items:center; gap:14px;">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7EE291;"><span style="width:6px;height:6px;border-radius:50%;background:#3FB950;box-shadow:0 0 7px #3FB950;"></span>updated 2h ago</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472;">2,886 games · 131 tags</span>
+          </div>
+        </div>
+
+        <!-- screen body -->
+        <div style="padding:22px; display:flex; flex-direction:column; gap:18px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between;">
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:600;">Build this next</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6B7382;">6 curated picks · synthesized from 2,886 games</div>
+          </div>
+
+          <!-- HERO CARD -->
+          <div style="position:relative; background:linear-gradient(135deg,rgba(63,185,80,0.07),rgba(77,124,254,0.04) 60%,transparent); border:1px solid rgba(63,185,80,0.28); border-radius:16px; padding:24px; display:grid; grid-template-columns:1.55fr 1fr; gap:28px;">
+            <div style="position:absolute; top:0; left:0; width:3px; height:100%; background:linear-gradient(#3FB950,rgba(63,185,80,0.2)); border-radius:16px 0 0 16px;"></div>
+            <!-- left -->
+            <div>
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:32px; line-height:1; color:#fff;">01</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:5px 10px; border-radius:6px; background:rgba(63,185,80,0.14); color:#7EE291; border:1px solid rgba(63,185,80,0.3);">Proven</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.06em; padding:5px 10px; border-radius:6px; background:rgba(63,185,80,0.1); color:#7EE291; border:1px solid rgba(63,185,80,0.25); display:inline-flex; align-items:center; gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:#3FB950;box-shadow:0 0 7px #3FB950;"></span>OPEN LANE</span>
+                <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7EE291;">▲ top mover</span>
+              </div>
+              <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:27px; letter-spacing:-0.02em; line-height:1.1; margin:0 0 8px;">Sell Lemonade Tycoon: Roll the Recipe</h3>
+              <p style="font-size:15px; line-height:1.5; color:#C4CAD4; margin:0 0 18px; max-width:46ch;">A food-stand tycoon where you <span style="color:#fff;">roll random recipes</span> (Golden Lemon, Rainbow Boba) that multiply income. Print money. Rebirth. Repeat.</p>
+
+              <!-- signal chips -->
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#C4CAD4;">cooking × food-stand</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#C4CAD4;">leader <span style="color:#E0A040;">22–30%</span></span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#C4CAD4;">19 winners 1k+</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#C4CAD4;">cook lift <span style="color:#7EE291;">1.21×</span></span>
+              </div>
+
+              <a href="#brief" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-size:13.5px; font-weight:600; color:#0A0B0E; background:#3FB950; padding:10px 16px; border-radius:9px; box-shadow:0 0 0 1px rgba(63,185,80,0.4),0 6px 18px rgba(63,185,80,0.25);" style-hover="background:#48c95b;">Open build brief →</a>
+            </div>
+
+            <!-- right stat rail -->
+            <div style="display:flex; flex-direction:column; gap:14px; border-left:1px solid rgba(255,255,255,0.08); padding-left:24px;">
+              <!-- confidence -->
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472;">Confidence</span><span style="font-size:12px; font-weight:600; color:#7EE291;">High</span></div>
+                <div style="display:flex; gap:4px;"><span style="flex:1; height:6px; border-radius:3px; background:#3FB950;"></span><span style="flex:1; height:6px; border-radius:3px; background:#3FB950;"></span><span style="flex:1; height:6px; border-radius:3px; background:#3FB950;"></span></div>
+              </div>
+              <!-- scope -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Scope</div>
+                <div style="display:flex; gap:4px;"><span style="flex:1; text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 0; border-radius:6px; color:#6B7382; background:rgba(255,255,255,0.03);">S</span><span style="flex:1; text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 0; border-radius:6px; color:#0A0B0E; background:#9FB4D6; font-weight:600;">M</span><span style="flex:1; text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 0; border-radius:6px; color:#6B7382; background:rgba(255,255,255,0.03);">L</span></div>
+              </div>
+              <!-- lane trend sparkline -->
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472;">Lane CCU · 90d</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7EE291;">+18%</span></div>
+                <svg viewBox="0 0 200 44" style="width:100%; height:38px; display:block;"><defs><linearGradient id="spark1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(63,185,80,0.35)"/><stop offset="1" stop-color="rgba(63,185,80,0)"/></linearGradient></defs><path d="M0,34 L20,32 L40,33 L60,28 L80,29 L100,24 L120,22 L140,18 L160,16 L180,12 L200,8" fill="none" stroke="#3FB950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0,34 L20,32 L40,33 L60,28 L80,29 L100,24 L120,22 L140,18 L160,16 L180,12 L200,8 L200,44 L0,44 Z" fill="url(#spark1)"/></svg>
+              </div>
+              <!-- evidence freshness -->
+              <div style="margin-top:auto; display:flex; align-items:center; gap:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
+                <span style="width:7px; height:7px; border-radius:50%; background:#3FB950; box-shadow:0 0 7px #3FB950;"></span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#9098A6;">evidence <span style="color:#C4CAD4;">2d</span> old · fresh</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECONDARY GRID -->
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+            <!-- #2 -->
+            <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;" style-hover="border-color:rgba(255,255,255,0.18); transform:translateY(-2px);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:11px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:18px; color:#C4CAD4;">02</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 7px; border-radius:5px; background:rgba(63,185,80,0.12); color:#7EE291;">Proven</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; padding:3px 7px; border-radius:5px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.2);">OPEN</span></div>
+              <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; margin:0 0 5px; line-height:1.2;">Roll-a-Dish: Recipe Gacha Kitchen</h4>
+              <p style="font-size:12.5px; line-height:1.45; color:#9098A6; margin:0 0 13px;">It's Slime RNG, but with dishes.</p>
+              <div style="display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B7382;"><span>leader <span style="color:#E0A040;">42%</span></span><span style="display:flex;gap:3px;"><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:rgba(255,255,255,0.1);"></span></span><span style="margin-left:auto;">scope S</span></div>
+            </div>
+            <!-- #3 -->
+            <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;" style-hover="border-color:rgba(255,255,255,0.18); transform:translateY(-2px);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:11px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:18px; color:#C4CAD4;">03</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 7px; border-radius:5px; background:rgba(123,91,255,0.14); color:#B6A2FF;">Emerging</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; padding:3px 7px; border-radius:5px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.2);">OPEN</span></div>
+              <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; margin:0 0 5px; line-height:1.2;">Baddie Bistro: Collect Chefs</h4>
+              <p style="font-size:12.5px; line-height:1.45; color:#9098A6; margin:0 0 13px;">Roll rare chefs. Run the empire.</p>
+              <div style="display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B7382;"><span>leader <span style="color:#7EE291;">22%</span></span><span style="display:flex;gap:3px;"><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:rgba(255,255,255,0.1);"></span></span><span style="margin-left:auto;">scope M</span></div>
+            </div>
+            <!-- #4 bold/cross-lane -->
+            <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;" style-hover="border-color:rgba(255,255,255,0.18); transform:translateY(-2px);">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:11px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:18px; color:#C4CAD4;">04</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 7px; border-radius:5px; background:rgba(123,91,255,0.14); color:#B6A2FF;">Bold</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; padding:3px 7px; border-radius:5px; background:rgba(229,72,77,0.1); color:#FF8A8D; border:1px solid rgba(229,72,77,0.22);">CROSS-LANE</span></div>
+              <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; margin:0 0 5px; line-height:1.2;">Hatch a Pet: Roll, Steal & Trade</h4>
+              <p style="font-size:12.5px; line-height:1.45; color:#9098A6; margin:0 0 13px;">Hatch rare pets. Steal your friend's.</p>
+              <div style="display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#6B7382;"><span>431k demand</span><span style="display:flex;gap:3px;"><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:#E0A040;"></span><span style="width:14px;height:5px;border-radius:3px;background:rgba(255,255,255,0.1);"></span></span><span style="margin-left:auto;">scope M</span></div>
+            </div>
+          </div>
+
+          <!-- RIGHT NOW STRIP -->
+          <div style="background:#0C0E13; border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+              <span style="color:#3FB950; font-size:14px;">⚡</span>
+              <span style="font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600;">Right now</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:#5B6472; padding:3px 8px; border:1px solid rgba(255,255,255,0.1); border-radius:999px;">auto · daily</span>
+              <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; color:#5B6472;">open lanes &amp; fresh winners</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+              <div style="background:rgba(63,185,80,0.06); border:1px solid rgba(63,185,80,0.22); border-radius:10px; padding:12px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; font-weight:600; color:#E9ECF1;">Incremental Sim</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#7EE291;">OPEN</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6;">975k CCU · 82 games · <span style="color:#7EE291;">leader 23.5%</span></div></div>
+              <div style="background:rgba(63,185,80,0.06); border:1px solid rgba(63,185,80,0.22); border-radius:10px; padding:12px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; font-weight:600; color:#E9ECF1;">Tycoon</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#7EE291;">OPEN</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6;">894k CCU · 90 games · <span style="color:#7EE291;">leader 17.4%</span></div></div>
+              <!-- tightening (caution) -->
+              <div style="background:rgba(224,160,64,0.06); border:1px solid rgba(224,160,64,0.22); border-radius:10px; padding:12px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; font-weight:600; color:#E9ECF1;">Action RPG</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#E0A040;">TIGHTENING</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6;">395k CCU · 14 games · <span style="color:#E0A040;">leader 55.3% ▲</span></div></div>
+              <!-- dominated (closed) -->
+              <div style="background:rgba(229,72,77,0.05); border:1px solid rgba(229,72,77,0.2); border-radius:10px; padding:12px; opacity:0.85;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; font-weight:600; color:#C4CAD4;">Anime Fighting</span><span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:#FF8A8D;">DOMINATED</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7A8290;">closed 4d ago · <span style="color:#FF8A8D;">leader 71%</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD ANATOMY -->
+      <div style="margin-top:36px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:16px;">Hero card anatomy — what each region encodes</div>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px;">
+          <div style="display:flex; gap:12px; background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:15px 16px;"><span style="font-family:'JetBrains Mono',monospace; color:#4D7CFE; font-size:13px; font-weight:600;">A</span><div><div style="font-size:13.5px; font-weight:600; margin-bottom:3px;">Rank + category + lane status</div><div style="font-size:12.5px; line-height:1.5; color:#9098A6;">Big mono rank. Category (proven/emerging/bold) by hue. <span style="color:#7EE291;">OPEN</span>/<span style="color:#E0A040;">TIGHTENING</span>/<span style="color:#FF8A8D;">DOMINATED</span> as a live state pill — the one fact that decides "go."</div></div></div>
+          <div style="display:flex; gap:12px; background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:15px 16px;"><span style="font-family:'JetBrains Mono',monospace; color:#4D7CFE; font-size:13px; font-weight:600;">B</span><div><div style="font-size:13.5px; font-weight:600; margin-bottom:3px;">Title + one-line thesis</div><div style="font-size:12.5px; line-height:1.5; color:#9098A6;">Space Grotesk title; a single punchy thesis. No truncated paragraph — the depth lives in the brief.</div></div></div>
+          <div style="display:flex; gap:12px; background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:15px 16px;"><span style="font-family:'JetBrains Mono',monospace; color:#4D7CFE; font-size:13px; font-weight:600;">C</span><div><div style="font-size:13.5px; font-weight:600; margin-bottom:3px;">Signal chips (mono)</div><div style="font-size:12.5px; line-height:1.5; color:#9098A6;">Leader share, winners count, ingredient lift — the evidence, quantified, tabular.</div></div></div>
+          <div style="display:flex; gap:12px; background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:15px 16px;"><span style="font-family:'JetBrains Mono',monospace; color:#4D7CFE; font-size:13px; font-weight:600;">D</span><div><div style="font-size:13.5px; font-weight:600; margin-bottom:3px;">Trust rail: confidence · scope · freshness</div><div style="font-size:12.5px; line-height:1.5; color:#9098A6;">Confidence as a filled meter (not a pill), scope as a segmented S/M/L, and an evidence-age dot so a stale pick can't masquerade as fresh.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 05 · BUILD BRIEF ====== -->
+    <section id="brief" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">05</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">The build brief</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 22px;">Click a pick → the full brief. The job here is <strong style="color:#E9ECF1; font-weight:600;">trust</strong>: confidence, evidence, risk and scope must be readable before the prose. So the brief opens with a verdict bar, then evidence with freshness, then a risk you can't miss.</p>
+
+      <!-- brief panel -->
+      <div style="background:#0A0B0E; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,0.55);">
+        <!-- back + verdict bar -->
+        <div style="padding:18px 22px; border-bottom:1px solid rgba(255,255,255,0.07);">
+          <div style="display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7A8290; margin-bottom:14px;"><span style="cursor:default;">← all picks</span><span style="opacity:0.4;">/</span><span style="color:#86A8FF;">#01 build brief</span></div>
+          <div style="display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap;">
+            <span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:38px; line-height:0.9; color:#fff;">01</span>
+            <div style="flex:1; min-width:240px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 9px; border-radius:6px; background:rgba(63,185,80,0.14); color:#7EE291; border:1px solid rgba(63,185,80,0.3);">Proven</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.06em; padding:4px 9px; border-radius:6px; background:rgba(63,185,80,0.1); color:#7EE291; border:1px solid rgba(63,185,80,0.25); display:inline-flex; align-items:center; gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:#3FB950;box-shadow:0 0 7px #3FB950;"></span>OPEN LANE</span>
+              </div>
+              <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:25px; letter-spacing:-0.02em; margin:0 0 4px; line-height:1.1;">Sell Lemonade Tycoon: Roll the Recipe</h3>
+              <div style="font-size:14px; color:#9FB4D6;">Roll golden recipes. Print money. Rebirth.</div>
+            </div>
+            <!-- verdict chips -->
+            <div style="display:flex; gap:10px;">
+              <div style="text-align:center; min-width:78px;"><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Confidence</div><div style="display:flex; gap:3px; justify-content:center; margin-bottom:5px;"><span style="width:16px; height:6px; border-radius:3px; background:#3FB950;"></span><span style="width:16px; height:6px; border-radius:3px; background:#3FB950;"></span><span style="width:16px; height:6px; border-radius:3px; background:#3FB950;"></span></div><div style="font-size:11.5px; font-weight:600; color:#7EE291;">High</div></div>
+              <div style="text-align:center; min-width:64px;"><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Scope</div><div style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#9FB4D6;">M</div><div style="font-size:10.5px; color:#7A8290;">~4–6 wk</div></div>
+              <div style="text-align:center; min-width:64px;"><div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Risk</div><div style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#E0A040;">Med</div><div style="font-size:10.5px; color:#7A8290;">RNG fatigue</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- body -->
+        <div style="padding:22px; display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+          <!-- left: the game -->
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#86A8FF; margin-bottom:8px;">Core loop</div>
+              <p style="font-size:13.5px; line-height:1.55; color:#C4CAD4; margin:0;">Run a food-stand → <span style="color:#fff;">roll a random recipe</span> + ingredient mutation (Golden Lemon, Rainbow Boba) that multiplies income → reinvest into stations → <span style="color:#fff;">rebirth</span> for permanent luck/income multipliers.</p>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#86A8FF; margin-bottom:8px;">First 30 seconds</div>
+              <p style="font-size:13.5px; line-height:1.55; color:#C4CAD4; margin:0;">Tap to serve customer #1 → instant cash → <span style="color:#fff;">first recipe roll inside 20s.</span> The gacha dopamine hits before the player can bounce.</p>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#86A8FF; margin-bottom:8px;">Depth — why it lasts</div>
+              <p style="font-size:13.5px; line-height:1.55; color:#C4CAD4; margin:0;">Escalating rarity tiers, mutation stacking, prestige/rebirth, and limited-time seasonal recipes. The luck stat gives a long chase; trading gives a reason to log in daily.</p>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div style="background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:14px;"><div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Monetization</div><div style="font-size:12.5px; line-height:1.5; color:#C4CAD4;">Luck-boost gamepass, recipe crate, 2× cash, auto-collect, seasonal recipe banners.</div></div>
+              <div style="background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:14px;"><div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:7px;">Virality</div><div style="font-size:12.5px; line-height:1.5; color:#C4CAD4;">"Show off your golden recipe" + recipe trading + rebirth flex. Built-in clip moments.</div></div>
+            </div>
+          </div>
+
+          <!-- right: evidence + incumbent + risk -->
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <!-- why now / evidence -->
+            <div style="background:#0C0E13; border:1px solid rgba(63,185,80,0.2); border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#7EE291;">Why now · evidence</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#7EE291;">● 2d old · fresh</span></div>
+              <div style="display:flex; flex-direction:column; gap:9px;">
+                <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#C4CAD4;"><span style="color:#3FB950;">✓</span><span style="flex:1;">Cooking/food-stand lane <strong style="color:#fff; font-weight:600;">OPEN</strong> — leader only 22–30%</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7EE291;">19 winners</span></div>
+                <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#C4CAD4;"><span style="color:#3FB950;">✓</span><span style="flex:1;">"cook" tag over-indexes among 1k+ hits</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7EE291;">1.21× lift</span></div>
+                <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#C4CAD4;"><span style="color:#3FB950;">✓</span><span style="flex:1;">"roll" gacha mechanic proven across lanes</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7EE291;">1.19× lift</span></div>
+                <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#C4CAD4;"><span style="color:#E0A040;">~</span><span style="flex:1;">Adjacent winner momentum (Grow a Garden 2)</span><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#E0A040;">525k · 25d</span></div>
+              </div>
+            </div>
+            <!-- incumbent -->
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#86A8FF; margin-bottom:8px;">Incumbent to beat &amp; your edge</div>
+              <p style="font-size:13.5px; line-height:1.55; color:#C4CAD4; margin:0;">A generic restaurant tycoon holds the lane at ~22–30% — <span style="color:#7EE291;">no monolith</span>. Your edge: a <span style="color:#fff;">gacha recipe-roll with a visible luck stat</span> (borrowed from the Grow-a-Garden mutation meta) bolted onto a proven tycoon loop. Nobody pairs them yet.</p>
+            </div>
+            <!-- BIGGEST RISK -->
+            <div style="background:rgba(229,72,77,0.07); border:1px solid rgba(229,72,77,0.3); border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="color:#FF8A8D; font-size:13px;">▲</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#FF8A8D;">Biggest risk</span></div>
+              <p style="font-size:13px; line-height:1.55; color:#E4C7C8; margin:0 0 8px;">The "roll everything" meta burns hot and could cool in weeks. If recipe RNG feels unfair, churn spikes hard.</p>
+              <div style="font-size:12px; line-height:1.5; color:#C4CAD4; padding-top:8px; border-top:1px solid rgba(229,72,77,0.2);"><strong style="color:#FF8A8D;">Mitigate:</strong> ship with trading + a pity timer day one; instrument the roll-to-quit funnel.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:13px; line-height:1.55; color:#7A8290; margin-top:18px; max-width:70ch;"><strong style="color:#9098A6;">At a glance, the user reads four things in order:</strong> confidence (can I trust this?) → scope (can I build it?) → risk (what kills it?) → evidence freshness (is this still true today?). Everything else is supporting prose they can skim.</div>
+    </section>
+
+    <!-- ====== 06 · OPPORTUNITY MAP ====== -->
+    <section id="map" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">06</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Opportunity Map — make "good" obvious</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:66ch; margin:0 0 14px;">The single biggest fix: <strong style="color:#E9ECF1; font-weight:600;">flip the Y axis.</strong> Today opportunity lives bottom-right, fighting the universal "up-and-right = better" instinct. Re-encode Y as <em style="color:#E9ECF1; font-style:normal;">how under-built a pairing is</em> (rare = high) and the opportunity corner moves to the <strong style="color:#E0A040; font-weight:600;">top-right</strong> — where the eye already looks for winners. Then name the zone, shade it, and annotate the standouts.</p>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-bottom:18px; font-family:'JetBrains Mono',monospace; font-size:11px;">
+        <span style="display:inline-flex; align-items:center; gap:7px; color:#C4CAD4;"><span style="width:11px; height:11px; border-radius:50%; background:rgba(240,182,82,0.7); border:1.5px solid #F0B652;"></span>Opportunity — popular, barely paired</span>
+        <span style="display:inline-flex; align-items:center; gap:7px; color:#C4CAD4;"><span style="width:11px; height:11px; border-radius:50%; background:rgba(63,185,80,0.5); border:1.5px solid #3FB950;"></span>Proven &amp; underbuilt</span>
+        <span style="display:inline-flex; align-items:center; gap:7px; color:#C4CAD4;"><span style="width:11px; height:11px; border-radius:50%; background:rgba(148,163,184,0.2); border:1px solid rgba(148,163,184,0.4);"></span>Common / saturated</span>
+        <span style="margin-left:auto; color:#6B7382;">dot size = best-in-combo CCU</span>
+      </div>
+
+      <!-- map panel -->
+      <div style="background:#0A0B0E; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:16px; box-shadow:0 24px 70px rgba(0,0,0,0.55);">
+        <svg viewBox="0 0 1010 545" style="width:100%; height:auto; display:block; font-family:'JetBrains Mono',monospace;">
+          <defs>
+            <radialGradient id="zoneGlow" cx="78%" cy="22%" r="55%"><stop offset="0" stop-color="rgba(224,160,64,0.16)"/><stop offset="1" stop-color="rgba(224,160,64,0)"/></radialGradient>
+          </defs>
+          <!-- plot bg -->
+          <rect x="92" y="44" width="876" height="462" rx="8" fill="rgba(255,255,255,0.012)"/>
+          <!-- gridlines -->
+          <line x1="304" y1="44" x2="304" y2="506" stroke="rgba(255,255,255,0.04)"/>
+          <line x1="530" y1="44" x2="530" y2="506" stroke="rgba(255,255,255,0.04)"/>
+          <line x1="750" y1="44" x2="750" y2="506" stroke="rgba(255,255,255,0.04)"/>
+          <line x1="92" y1="190" x2="968" y2="190" stroke="rgba(255,255,255,0.04)"/>
+          <line x1="92" y1="350" x2="968" y2="350" stroke="rgba(255,255,255,0.04)"/>
+          <!-- opportunity zone -->
+          <rect x="618" y="56" width="350" height="196" rx="10" fill="url(#zoneGlow)" stroke="rgba(240,182,82,0.45)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="634" y="80" fill="#F0B652" font-size="12" font-weight="700" letter-spacing="1.5">OPPORTUNITY ZONE</text>
+          <text x="634" y="98" fill="rgba(240,182,82,0.7)" font-size="10.5">popular ingredients · almost nobody pairs them</text>
+          <!-- quadrant labels -->
+          <text x="108" y="74" fill="rgba(148,163,184,0.45)" font-size="10.5">niche &amp; unbuilt</text>
+          <text x="108" y="495" fill="rgba(148,163,184,0.4)" font-size="10.5">fringe — low reach</text>
+          <text x="788" y="495" fill="rgba(148,163,184,0.45)" font-size="10.5">crowded &amp; saturated</text>
+          <!-- dots -->
+          <sc-for list="{{ dots }}" as="d" hint-placeholder-count="0">
+            <circle cx="{{ d.x }}" cy="{{ d.y }}" r="{{ d.r }}" fill="{{ d.fill }}" stroke="{{ d.stroke }}" stroke-width="1"></circle>
+          </sc-for>
+          <!-- annotated standouts -->
+          <circle cx="810" cy="146" r="11" fill="rgba(240,182,82,0.85)" stroke="#fff" stroke-width="2"/>
+          <line x1="799" y1="146" x2="700" y2="120" stroke="rgba(240,182,82,0.6)" stroke-width="1"/>
+          <text x="694" y="116" text-anchor="end" fill="#F4D58A" font-size="11" font-weight="600">cook × race</text>
+          <text x="694" y="129" text-anchor="end" fill="rgba(244,213,138,0.6)" font-size="9.5">1 game · 229k best CCU</text>
+          <circle cx="688" cy="201" r="9.5" fill="rgba(240,182,82,0.85)" stroke="#fff" stroke-width="2"/>
+          <line x1="688" y1="210" x2="640" y2="250" stroke="rgba(240,182,82,0.6)" stroke-width="1"/>
+          <text x="634" y="254" text-anchor="end" fill="#F4D58A" font-size="11" font-weight="600">survive × hatch</text>
+          <text x="634" y="267" text-anchor="end" fill="rgba(244,213,138,0.6)" font-size="9.5">2 games · 246/104 reach</text>
+          <circle cx="892" cy="164" r="10" fill="rgba(240,182,82,0.85)" stroke="#fff" stroke-width="2"/>
+          <text x="892" y="142" text-anchor="middle" fill="#F4D58A" font-size="11" font-weight="600">build × pet</text>
+          <!-- axes -->
+          <line x1="92" y1="506" x2="968" y2="506" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <line x1="92" y1="44" x2="92" y2="506" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <!-- x ticks -->
+          <text x="120" y="525" fill="#6B7382" font-size="10">low reach</text>
+          <text x="530" y="525" text-anchor="middle" fill="#6B7382" font-size="10">popularity of the two ingredients  →</text>
+          <text x="940" y="525" text-anchor="end" fill="#6B7382" font-size="10">high reach</text>
+          <!-- y ticks (rotated) -->
+          <text x="84" y="500" text-anchor="end" fill="#6B7382" font-size="10">common</text>
+          <text x="78" y="280" text-anchor="middle" fill="#6B7382" font-size="10" transform="rotate(-90 78 280)">↑  how under-built the pairing is</text>
+          <text x="84" y="60" text-anchor="end" fill="#6B7382" font-size="10">rare</text>
+        </svg>
+      </div>
+
+      <!-- design notes -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px;">
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px;"><div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E0A040; margin-bottom:8px;">Name the zone</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">A shaded, dashed, labeled rectangle in the top-right does what a caption never could: it points at the answer <em style="font-style:normal; color:#C4CAD4;">inside</em> the chart.</div></div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px;"><div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E0A040; margin-bottom:8px;">Rank the dots</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">Annotate the top 3–5 standouts with labels + leader lines. Everything else recedes to texture. Hover any dot → the combo, best game, CCU.</div></div>
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px;"><div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E0A040; margin-bottom:8px;">Connect to picks</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">Clicking a gold dot jumps to (or generates) a build brief — closing the loop from "validate" back to "decide."</div></div>
+      </div>
+    </section>
+
+    <!-- ====== 07 · OTHER VIEWS ====== -->
+    <section id="views" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">07</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">The validate &amp; explore views</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 30px;">Light wireframes — the principle in each case is the same: replace "pretty but un-actionable" with "shows the answer." Reasoning and tradeoff noted under each.</p>
+
+      <!-- Game Universe -->
+      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:28px; align-items:center; margin-bottom:36px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:12px;">Game Universe — drop t-SNE for a labeled genre treemap</div>
+          <div style="background:#0C0E13; border:1px solid rgba(255,255,255,0.09); border-radius:12px; padding:12px; display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:64px; gap:6px;">
+            <div style="grid-column:span 2; grid-row:span 2; border-radius:8px; background:rgba(86,180,233,0.16); border:1px solid rgba(86,180,233,0.4); padding:11px; display:flex; flex-direction:column;"><span style="font-size:13px; font-weight:600; color:#E9ECF1;">Simulation</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#9098A6;">975k CCU · 82 hits</span><span style="margin-top:auto; font-family:'JetBrains Mono',monospace; font-size:9px; color:#7EE291;">OPEN · leader 23%</span></div>
+            <div style="grid-column:span 2; border-radius:8px; background:rgba(213,94,0,0.16); border:1px solid rgba(213,94,0,0.4); padding:9px; display:flex; flex-direction:column;"><span style="font-size:12px; font-weight:600;">Action</span><span style="margin-top:auto; font-family:'JetBrains Mono',monospace; font-size:9px; color:#FFB38A;">tightening · 55%</span></div>
+            <div style="border-radius:8px; background:rgba(0,114,178,0.18); border:1px solid rgba(0,114,178,0.4); padding:9px; display:flex; flex-direction:column;"><span style="font-size:11.5px; font-weight:600;">RPG</span></div>
+            <div style="border-radius:8px; background:rgba(230,159,0,0.16); border:1px solid rgba(230,159,0,0.4); padding:9px; display:flex; flex-direction:column;"><span style="font-size:11.5px; font-weight:600;">Survival</span></div>
+            <div style="border-radius:8px; background:rgba(0,158,115,0.16); border:1px solid rgba(0,158,115,0.4); padding:9px; display:flex; flex-direction:column;"><span style="font-size:11.5px; font-weight:600;">Obby</span></div>
+            <div style="border-radius:8px; background:rgba(204,121,167,0.16); border:1px solid rgba(204,121,167,0.4); padding:9px; display:flex; flex-direction:column;"><span style="font-size:11.5px; font-weight:600;">Roleplay</span></div>
+            <div style="border-radius:8px; background:rgba(240,228,66,0.13); border:1px solid rgba(240,228,66,0.35); padding:9px;"><span style="font-size:11.5px; font-weight:600;">Party</span></div>
+            <div style="border-radius:8px; background:rgba(148,163,184,0.1); border:1px solid rgba(148,163,184,0.3); padding:9px;"><span style="font-size:11.5px; font-weight:600; color:#C4CAD4;">Other</span></div>
+            <div style="grid-column:span 2; border-radius:8px; background:rgba(86,180,233,0.1); border:1px solid rgba(86,180,233,0.3); padding:9px;"><span style="font-size:11.5px; font-weight:600;">Incremental Sim</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4; margin-bottom:10px;"><strong style="color:#fff; font-weight:600;">Is t-SNE the right call? No.</strong> It's gorgeous but its distances are arbitrary and clusters are unlabeled — you can't <em style="font-style:normal; color:#E9ECF1;">act</em> on it. A treemap of genres, each block sized by total CCU and tinted by saturation, answers "which genre has the most demand vs the most competition" in one read.</div>
+          <div style="font-size:13px; line-height:1.5; color:#7A8290;"><strong style="color:#9098A6;">Tradeoff:</strong> you lose the "lonely island = novel look" serendipity. Keep the t-SNE as an optional "explore" toggle for the curious — but don't make it the default for a decision tool.</div>
+        </div>
+      </div>
+
+      <!-- Winning Ingredients -->
+      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:28px; align-items:center; margin-bottom:36px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:12px;">Winning Ingredients — lollipop with a 1.0× baseline</div>
+          <div style="background:#0C0E13; border:1px solid rgba(255,255,255,0.09); border-radius:12px; padding:18px; position:relative;">
+            <div style="position:absolute; left:42%; top:14px; bottom:14px; width:1px; background:repeating-linear-gradient(#5B6472 0 4px, transparent 4px 8px);"></div>
+            <div style="position:absolute; left:42%; top:0; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:9px; color:#6B7382;">1.0×</div>
+            <div style="display:flex; flex-direction:column; gap:11px; margin-top:8px;">
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6; text-align:right;">car</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; left:42%; height:2px; top:3px; width:38%; background:#3FB950;"></div><div style="position:absolute; left:calc(42% + 38%); top:0; width:8px; height:8px; border-radius:50%; background:#3FB950;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7EE291;">1.71×</span></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6; text-align:right;">hide</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; left:42%; height:2px; top:3px; width:36%; background:#3FB950;"></div><div style="position:absolute; left:calc(42% + 36%); top:0; width:8px; height:8px; border-radius:50%; background:#3FB950;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7EE291;">1.68×</span></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6; text-align:right;">tower</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; left:42%; height:2px; top:3px; width:26%; background:#3FB950;"></div><div style="position:absolute; left:calc(42% + 26%); top:0; width:8px; height:8px; border-radius:50%; background:#3FB950;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7EE291;">1.50×</span></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6; text-align:right;">cook</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; left:42%; height:2px; top:3px; width:11%; background:#3FB950;"></div><div style="position:absolute; left:calc(42% + 11%); top:0; width:8px; height:8px; border-radius:50%; background:#3FB950;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7EE291;">1.21×</span></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#9098A6; text-align:right;">race</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; left:42%; height:2px; top:3px; width:4%; background:#9098A6;"></div><div style="position:absolute; left:calc(42% + 4%); top:0; width:8px; height:8px; border-radius:50%; background:#9098A6;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#9098A6;">1.09×</span></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:34px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#7A8290; text-align:right;">build</span><div style="flex:1; position:relative; height:8px;"><div style="position:absolute; right:calc(58% + 2%); height:2px; top:3px; width:6%; background:#E5484D;"></div><div style="position:absolute; left:calc(42% - 8%); top:0; width:8px; height:8px; border-radius:50%; background:#E5484D;"></div></div><span style="width:36px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#FF8A8D;">0.92×</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4; margin-bottom:10px;"><strong style="color:#fff; font-weight:600;">Bars hide the baseline.</strong> "Winner" is defined by lift &gt; 1.0× — so 1.0 is the only number that matters, and full-length bars bury it. A dot plot anchored on a dashed 1.0× line makes "above the line = winning ingredient" instant, and lets a <span style="color:#FF8A8D;">losing</span> ingredient sit visibly to the left.</div>
+          <div style="font-size:13px; line-height:1.5; color:#7A8290;"><strong style="color:#9098A6;">Encode sample size:</strong> fade or shrink dots with thin evidence (e.g. 4/18 wins) so a flashy lift on tiny n doesn't mislead.</div>
+        </div>
+      </div>
+
+      <!-- Tables -->
+      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:28px; align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472; margin-bottom:12px;">Tables — terminal density, linked to picks</div>
+          <div style="background:#0C0E13; border:1px solid rgba(255,255,255,0.09); border-radius:12px; overflow:hidden;">
+            <div style="display:grid; grid-template-columns:1.4fr 0.5fr 0.8fr 1fr; padding:9px 14px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:#5B6472; border-bottom:1px solid rgba(255,255,255,0.08);"><span>Combo</span><span style="text-align:right;">#</span><span style="text-align:right;">Best CCU</span><span style="text-align:right;">Best game</span></div>
+            <div style="display:grid; grid-template-columns:1.4fr 0.5fr 0.8fr 1fr; padding:9px 14px; font-size:11.5px; color:#C4CAD4; border-bottom:1px solid rgba(255,255,255,0.04);"><span>harvest × steal</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7A8290;">2</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7EE291;">525,582</span><span style="text-align:right; color:#86A8FF;">Grow a Garden 2 →</span></div>
+            <div style="display:grid; grid-template-columns:1.4fr 0.5fr 0.8fr 1fr; padding:9px 14px; font-size:11.5px; color:#C4CAD4; border-bottom:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.012);"><span>garden × steal</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7A8290;">5</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7EE291;">525,582</span><span style="text-align:right; color:#86A8FF;">Grow a Garden 2 →</span></div>
+            <div style="display:grid; grid-template-columns:1.4fr 0.5fr 0.8fr 1fr; padding:9px 14px; font-size:11.5px; color:#C4CAD4;"><span>build × Pet Care°</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7A8290;">3</span><span style="text-align:right; font-family:'JetBrains Mono',monospace; color:#7EE291;">256,255</span><span style="text-align:right; color:#86A8FF;">Adopt Me! →</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px; line-height:1.55; color:#C4CAD4; margin-bottom:10px;"><strong style="color:#fff; font-weight:600;">The tables are fine — just orphaned.</strong> Keep the dense, sortable two-column layout (proven / untapped), but make every row a launch point: click → the combo pre-filters the Opportunity Map and offers "draft a brief."</div>
+          <div style="font-size:13px; line-height:1.5; color:#7A8290;">Right-align all numerics, tabular figures, monospace. Color CCU on the opportunity scale so the eye scans the column, not the rows.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 08 · EMPTY & LIVE STATES ====== -->
+    <section id="states" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">08</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Empty &amp; live states</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 28px;">Data rebuilds daily, so the design has to be honest when reality shifts. Five states the build must ship with — designed, not left to a blank box.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px;">
+        <!-- stale data -->
+        <div style="background:rgba(229,72,77,0.06); border:1px solid rgba(229,72,77,0.28); border-radius:12px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="color:#FF8A8D;">⚠</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#FF8A8D;">Stale refresh</span></div>
+          <div style="font-size:13.5px; line-height:1.5; color:#E4C7C8;">Top banner when the daily build didn't run: <span style="color:#fff;">"Data is 2 days old — last refresh Jun 13."</span> Dim the freshness dots site-wide so no pick looks newer than it is.</div>
+        </div>
+        <!-- lane dominated -->
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#FF8A8D;">Lane closed</span></div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">A once-open lane now <span style="color:#FF8A8D;">DOMINATED</span> (leader &gt; 60%). Don't delete it — show it greyed with the date it closed, so the dev learns the market moved.</div>
+        </div>
+        <!-- aged evidence -->
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="width:7px;height:7px;border-radius:50%;background:#E0A040;box-shadow:0 0 7px #E0A040;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#E0A040;">Aging evidence</span></div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">A card whose why-now signal hasn't refreshed in 14+ days: freshness dot turns <span style="color:#E0A040;">amber</span>, confidence auto-steps down a notch. Trust degrades with the data.</div>
+        </div>
+        <!-- zero winners -->
+        <div style="background:#101218; border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472;">Empty — 0 fresh winners</span></div>
+          <div style="font-size:13.5px; line-height:1.5; color:#C4CAD4;">Honest copy, not a void: <span style="color:#9098A6; font-style:italic;">"No new 1k+ games in the last 90 days. The meta's quiet — a good week to ship into less noise."</span></div>
+        </div>
+        <!-- movers (full width) -->
+        <div style="grid-column:span 2; background:linear-gradient(135deg,rgba(63,185,80,0.06),transparent); border:1px solid rgba(63,185,80,0.22); border-radius:12px; padding:16px; display:flex; align-items:center; gap:16px;">
+          <div style="flex:none;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#7EE291;">Day-over-day movers</span></div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 10px; border-radius:7px; background:rgba(63,185,80,0.1); color:#7EE291; border:1px solid rgba(63,185,80,0.25);">Incremental Sim ▲ 12%</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 10px; border-radius:7px; background:rgba(229,72,77,0.08); color:#FF8A8D; border:1px solid rgba(229,72,77,0.22);">Anime ▼ closed</span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 10px; border-radius:7px; background:rgba(123,91,255,0.12); color:#B6A2FF; border:1px solid rgba(123,91,255,0.25);">Grow a Garden 2 · NEW</span></div>
+          <div style="margin-left:auto; font-size:12.5px; color:#9098A6; max-width:30ch;">Surface what changed since yesterday so a returning dev re-orients in seconds.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 09 · RESPONSIVE & A11Y ====== -->
+    <section id="responsive" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">09</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Responsive &amp; accessibility</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 30px;">The owner works desktop-first, but the public URL gets opened on phones — so the <strong style="color:#E9ECF1; font-weight:600;">cards + Right Now strip</strong> (the shareable, at-a-glance part) must be excellent on mobile. The canvas maps degrade gracefully rather than contort.</p>
+
+      <div style="display:grid; grid-template-columns:300px 1fr; gap:36px; align-items:start;">
+        <!-- phone mock -->
+        <div style="justify-self:center;">
+          <div style="width:268px; border:9px solid #1A1D24; border-radius:34px; background:#0A0B0E; box-shadow:0 24px 60px rgba(0,0,0,0.5); overflow:hidden;">
+            <div style="height:26px; background:#0A0B0E; display:flex; align-items:center; justify-content:center;"><div style="width:70px; height:5px; border-radius:3px; background:#1A1D24;"></div></div>
+            <div style="padding:12px; display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; align-items:center; gap:7px;"><span style="width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,#4D7CFE,#7B5BFF);"></span><span style="font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600;">Idea Finder</span><span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:8px; color:#7EE291;">● 2h</span></div>
+              <!-- hero mini -->
+              <div style="background:linear-gradient(135deg,rgba(63,185,80,0.08),transparent); border:1px solid rgba(63,185,80,0.28); border-radius:12px; padding:12px;">
+                <div style="display:flex; align-items:center; gap:7px; margin-bottom:8px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:18px;">01</span><span style="font-family:'JetBrains Mono',monospace; font-size:7.5px; padding:2px 6px; border-radius:4px; background:rgba(63,185,80,0.14); color:#7EE291;">PROVEN</span><span style="font-family:'JetBrains Mono',monospace; font-size:7.5px; padding:2px 6px; border-radius:4px; background:rgba(63,185,80,0.1); color:#7EE291;">OPEN</span></div>
+                <div style="font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; line-height:1.15; margin-bottom:5px;">Sell Lemonade Tycoon</div>
+                <div style="font-size:10.5px; color:#9098A6; margin-bottom:10px;">Roll golden recipes. Print money.</div>
+                <div style="display:flex; gap:3px; margin-bottom:8px;"><span style="flex:1;height:5px;border-radius:3px;background:#3FB950;"></span><span style="flex:1;height:5px;border-radius:3px;background:#3FB950;"></span><span style="flex:1;height:5px;border-radius:3px;background:#3FB950;"></span></div>
+                <div style="font-family:'JetBrains Mono',monospace; font-size:8.5px; color:#6B7382;">High confidence · scope M · evidence 2d</div>
+              </div>
+              <!-- strip mini -->
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; color:#5B6472;">⚡ open lanes</div>
+                <div style="background:rgba(63,185,80,0.06); border:1px solid rgba(63,185,80,0.2); border-radius:8px; padding:8px;"><div style="font-size:10px; font-weight:600;">Incremental Sim</div><div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:#9098A6;">975k · leader 23%</div></div>
+                <div style="background:rgba(63,185,80,0.06); border:1px solid rgba(63,185,80,0.2); border-radius:8px; padding:8px;"><div style="font-size:10px; font-weight:600;">Tycoon</div><div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:#9098A6;">894k · leader 17%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- notes -->
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:12px;"><span style="flex:none; color:#4D7CFE; font-family:'JetBrains Mono',monospace; font-size:13px;">↕</span><div><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Cards & strip stack to one column</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">The hero stays full-bleed and first; the trust rail moves below the thesis. Tap targets ≥ 44px. Signal chips wrap, never truncate.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; color:#4D7CFE; font-family:'JetBrains Mono',monospace; font-size:13px;">▢</span><div><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Canvas maps → static "best on desktop"</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">On phones, the Opportunity Map renders a non-interactive snapshot with just the labeled zone + top-5 annotated combos, and a "open on desktop to explore" note. Don't ship a pinch-zoom canvas no one can use.</div></div></div>
+          <div style="display:flex; gap:12px;"><span style="flex:none; color:#4D7CFE; font-family:'JetBrains Mono',monospace; font-size:13px;">◉</span><div><div style="font-size:14px; font-weight:600; margin-bottom:3px;">Accessibility floor</div><div style="font-size:13px; line-height:1.5; color:#9098A6;">Body text ≥ 4.5:1 contrast on every surface; status never encoded by color alone (pair each with a word — OPEN / TIGHTENING / DOMINATED). 2px focus ring at brand-blue on all tabs, cards, rows; full keyboard tab order; <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9FB4D6;">prefers-reduced-motion</span> kills the sparkline + fade.</div></div></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.22);">✓ colorblind-safe palette</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.22);">✓ color + label redundancy</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.22);">✓ keyboard nav</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 11px; border-radius:7px; background:rgba(63,185,80,0.08); color:#7EE291; border:1px solid rgba(63,185,80,0.22);">✓ reduced-motion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 10 · CHANGE LIST ====== -->
+    <section id="plan" style="scroll-margin-top:24px; padding:48px 0; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#4D7CFE;">10</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:30px; letter-spacing:-0.02em; margin:0;">Prioritized change list</h2>
+      </div>
+      <p style="font-size:16px; line-height:1.6; color:#A6ADBA; max-width:64ch; margin:0 0 30px;">All implementable in vanilla JS / canvas / SVG inside the single <span style="font-family:'JetBrains Mono',monospace; font-size:13.5px; color:#9FB4D6;">index.html</span>. Ordered by impact-per-hour.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+        <!-- P0 -->
+        <div style="background:linear-gradient(180deg,rgba(229,72,77,0.06),transparent); border:1px solid rgba(229,72,77,0.28); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px; color:#FF8A8D;">P0</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#FF8A8D;">ship now · high impact</span></div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#FF8A8D;">①</span> Flip the Opportunity Map Y-axis; shade + label the top-right zone.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#FF8A8D;">②</span> Annotate the top 3–5 standout combos directly on the map.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#FF8A8D;">③</span> Give #1 a full-width hero treatment; demote #2–6 to a grid.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#FF8A8D;">④</span> OPEN / TIGHTENING / DOMINATED state pill on every card + lane.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#FF8A8D;">⑤</span> Stale-data banner + evidence-freshness dots.</div>
+          </div>
+        </div>
+        <!-- P1 -->
+        <div style="background:linear-gradient(180deg,rgba(224,160,64,0.06),transparent); border:1px solid rgba(224,160,64,0.25); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px; color:#E0A040;">P1</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#E0A040;">next · clarity</span></div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#E0A040;">⑥</span> Redesign the brief: verdict bar (confidence/scope/risk) → evidence → biggest-risk callout.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#E0A040;">⑦</span> Confidence as a filled meter; scope as segmented S/M/L.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#E0A040;">⑧</span> Winning Ingredients → dot plot on a 1.0× baseline; encode sample size.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#E0A040;">⑨</span> Rename tabs to Decide / Validate / Explore; link table rows → map → brief.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#E0A040;">⑩</span> Adopt the type + color system (mono numerals, semantic palette).</div>
+          </div>
+        </div>
+        <!-- P2 -->
+        <div style="background:linear-gradient(180deg,rgba(77,124,254,0.06),transparent); border:1px solid rgba(77,124,254,0.25); border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px; color:#86A8FF;">P2</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#86A8FF;">later · polish</span></div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#86A8FF;">⑪</span> Game Universe → labeled genre treemap; keep t-SNE as optional toggle.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#86A8FF;">⑫</span> Day-over-day movers row; "what changed" since last build.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#86A8FF;">⑬</span> Mobile pass: stacked cards, static map snapshot.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#86A8FF;">⑭</span> Saved-ideas watchlist persisted to localStorage.</div>
+            <div style="font-size:13px; line-height:1.45; color:#D4D9E1;"><span style="color:#86A8FF;">⑮</span> Full keyboard nav + focus rings + reduced-motion.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SHIP FIRST ====== -->
+    <section id="ship" style="scroll-margin-top:24px; padding:48px 0 0;">
+      <div style="background:linear-gradient(135deg,rgba(63,185,80,0.1),rgba(77,124,254,0.05) 70%,transparent); border:1px solid rgba(63,185,80,0.3); border-radius:18px; padding:36px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-40px; right:-30px; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle, rgba(63,185,80,0.12), transparent 70%);"></div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7EE291; margin-bottom:14px;">→ The single highest-impact change to ship first</div>
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:30px; letter-spacing:-0.02em; line-height:1.15; margin:0 0 14px; max-width:24ch;">Flip the Opportunity Map's Y-axis and name the zone.</h3>
+        <p style="font-size:16px; line-height:1.6; color:#C4CAD4; max-width:62ch; margin:0;">It's a few lines of vanilla JS — invert one axis, draw one shaded rectangle, label two corners — and it converts your most distinctive, most defensible view from "a pretty cloud" into "the chart points at the answer." That single move is what makes the whole tool feel like a quant's edge instead of a dashboard. Everything else in P0 compounds on it.</p>
+      </div>
+      <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; color:#3A414C; padding:40px 0 8px;">ROBLOX IDEA FINDER · REDESIGN PROPOSAL · v1</div>
+    </section>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    let s = 20260615;
+    const rnd = () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; };
+    const X0 = 92, X1 = 968, Y0 = 44, Y1 = 506;
+    const xp = (t) => +(X0 + t * (X1 - X0)).toFixed(1);
+    const yp = (t) => +(Y1 - t * (Y1 - Y0)).toFixed(1);
+    const dots = [];
+    // common cloud — low rarity (saturated), gray
+    for (let i = 0; i < 72; i++) {
+      const tx = 0.06 + rnd() * 0.92, ty = rnd() * rnd() * 0.4;
+      dots.push({ x: xp(tx), y: yp(ty), r: +(2.4 + rnd() * 5.5).toFixed(1), fill: 'rgba(148,163,184,0.14)', stroke: 'rgba(148,163,184,0.26)' });
+    }
+    // proven & underbuilt — green
+    for (let i = 0; i < 34; i++) {
+      const tx = 0.28 + rnd() * 0.66, ty = 0.33 + rnd() * 0.33;
+      dots.push({ x: xp(tx), y: yp(ty), r: +(3.5 + rnd() * 6.5).toFixed(1), fill: 'rgba(63,185,80,0.45)', stroke: 'rgba(63,185,80,0.85)' });
+    }
+    // opportunities — gold, in the zone
+    for (let i = 0; i < 9; i++) {
+      const tx = 0.62 + rnd() * 0.32, ty = 0.6 + rnd() * 0.3;
+      dots.push({ x: xp(tx), y: yp(ty), r: +(5 + rnd() * 6).toFixed(1), fill: 'rgba(224,160,64,0.55)', stroke: 'rgba(240,182,82,0.95)' });
+    }
+    return { dots };
+  }
+}
+</script>
+</body>
+</html>
