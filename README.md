@@ -136,7 +136,7 @@ needed to view — just double-click) the way the Steam videos present their dat
 ```bash
 pip install numpy scikit-learn        # scikit-learn is optional (enables the t-SNE map)
 python roblox_research.py harvest      # build data/corpus.json first
-python roblox_viz.py                   # -> roblox_dashboard.html, then open it
+python roblox_viz.py                   # -> docs/index.html (open it, or push to publish)
 ```
 
 Four interactive tabs (hover for details, scroll to zoom, drag to pan):

@@ -481,7 +481,7 @@ function esc(s){return (s==null?'':(''+s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<
 def main():
     ap = argparse.ArgumentParser(description="Build an interactive Roblox idea dashboard from a corpus.")
     ap.add_argument("--corpus", default=os.path.join("data", "corpus.json"))
-    ap.add_argument("--out", default="roblox_dashboard.html")
+    ap.add_argument("--out", default=os.path.join("docs", "index.html"))
     args = ap.parse_args()
 
     if not os.path.exists(args.corpus):
@@ -495,6 +495,7 @@ def main():
             .replace("__NTAGS__", str(payload["n_tags"]))
             .replace("__METHOD__", payload["embed_method"])
             .replace("__BUILT__", datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")))
+    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"wrote {args.out}  ({len(payload['combos'])} combos, {len(payload['universe'])} games, "
