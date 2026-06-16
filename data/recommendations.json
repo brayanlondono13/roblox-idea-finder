@@ -2,6 +2,120 @@
   "generated": "2026-06-15",
   "cards": [
     {
+      "title": "Sell Lemonade Tycoon: Roll the Recipe",
+      "tagline": "Roll golden recipes. Print money.",
+      "category": "proven",
+      "confidence": "high",
+      "scope": "M",
+      "lane": "cooking / food-stand (Tycoon) — OPEN, leader ~22-30%",
+      "mechanics": [
+        "tycoon",
+        "roll",
+        "lucky",
+        "build",
+        "rebirth"
+      ],
+      "theme": "A cozy roadside food/drink stand (lemonade -> boba -> ramen) where rare 'mutation' recipes (Golden Lemon, Rainbow Boba) are the jackpot.",
+      "core_loop": "Run a food/drink stand -> ROLL random recipes + ingredient mutations (Golden Lemon, Rainbow Boba) that multiply sale price -> place auto-serving stations (offline cash) -> reinvest in stations/luck/new themes (Lemonade -> Boba -> Ramen) -> rebirth to scale.",
+      "first_30_seconds": "You're handed a beat-up lemonade stand and one giant ROLL button. Tap it -> your lemon shimmers GOLD with an x10 popup -> drop it in the stand and watch coins fountain out. A free second roll hits Rainbow. Hooked before any tutorial text.",
+      "depth": "The mutation multiplier creates an exponential payout curve where luck investment, station count, and rebirth timing form the optimization spine (the exact pattern Build A Ring Farm rode to ~40k). Theme unlocks gate new mutation pools; recipe completion rewards completionists. The roll stays frictionless, so cooking is a flex/collection layer, not a gate.",
+      "why_now": "Sell Lemons proves the food-stand fantasy at ~99,015 CCU; Build A Ring Farm (grow-sell incremental with a mutation layer) hit 39,724 CCU at just 61 days. The cooking/food-stand lane is OPEN (fragmented, leader ~22-30%). No food-tycoon-with-RNG-roller exists in the data — clean white space.",
+      "incumbent": "Sell Lemons (~99,015 CCU) — a pure food-stand cash tycoon with no roll/rarity layer.",
+      "differentiation": "Injects rarity-chasing into a flat cash-tycoon — the dopamine spike Sell Lemons lacks — while keeping the chill stand fantasy. No food-tycoon-with-RNG-roller exists yet.",
+      "risk": "The exact fusion has ZERO proven incumbent. Both parents (Sell Lemons, Build A Ring Farm) are independently proven, but the combo is untested execution risk: the offline-tycoon and rarity-chase loops must be balanced so neither cannibalizes the other.",
+      "retention": "Daily luck-streak login, weekly new mutation tiers + limited mythic recipes, new theme worlds, rebirth prestige ladder, recipe-dex completion buffs.",
+      "monetization": "2x luck, 2x cash, auto-roll, auto-collect/offline gamepasses; limited premium mutation banners (event Galaxy odds). Core roll always free.",
+      "virality": "Group luck multiplier for friends; insane-mutation clips are the thumbnail (a giant glowing Galaxy lemon, 'x1,000,000?!'); show-off display shelf.",
+      "evidence_games": [
+        {
+          "name": "Sell Lemons",
+          "ccu": 99015,
+          "note": "Pure food-stand tycoon — proves the fantasy at scale; lacks the rarity hook."
+        },
+        {
+          "name": "Build A Ring Farm",
+          "ccu": 39724,
+          "note": "Grow-sell incremental with the exact mutation-multiplier layer; ~40k @61d proves the hook scales fast past 1k."
+        }
+      ]
+    },
+    {
+      "title": "Roll-a-Dish: Recipe Gacha Kitchen",
+      "tagline": "It's Slime RNG, but with dishes.",
+      "category": "proven",
+      "confidence": "medium",
+      "scope": "M",
+      "lane": "cooking > Incremental Simulator — OPEN, lane leader ~42%",
+      "mechanics": [
+        "roll",
+        "gacha",
+        "lucky",
+        "collect",
+        "rebirth"
+      ],
+      "theme": "A bottomless gacha kitchen — tap a Mystery Burner, roll dishes from common to mythic across diners, sushi bars, and a space cafe.",
+      "core_loop": "Tap a Mystery Burner to roll a random dish (common -> mythic, visible luck stat) -> placed dishes auto-cook and earn offline -> spend on better burners (rarity odds), luck potions, new kitchen-worlds (Diner -> Sushi Bar -> Space Cafe) -> rebirth for permanent luck/multipliers -> recipe-dex completion grants income buffs. It is Slime RNG with dishes instead of slimes.",
+      "first_30_seconds": "A glowing Mystery Burner sits in front of you with a ROLL button. Tap -> a dish materializes with a rarity beam and a luck number -> it starts auto-cooking and paying out. 'Roll again?' The second roll hits Epic. Pure slot-machine pull, no minigame in the way.",
+      "depth": "A clean roll->collect->upgrade->unlock loop with a recipe-dex that rewards set completion. Luck odds, burner tiers, and rebirth timing are the optimization spine; kitchen-worlds pace progression. The closest comp (Catch and Cook) gates the roll behind a fishing minigame — removing that friction is the whole bet.",
+      "why_now": "Catch and Cook! hit ~1,337 CCU at 102 days using exactly this skeleton (RNG-catch + cook + offline + luck + 1.8M combos). Dumpling Squishy Race (Incremental Sim) hit 5,440 CCU in 32 days, proving fresh entrants break 1k fast in this genre. cooking > Incremental Simulator is an open sub-lane.",
+      "incumbent": "Catch and Cook! (~1,337 CCU, 102d) — fish-only and gates the RNG behind a fishing minigame.",
+      "differentiation": "Leads with the pure slot-machine roll on ALL food types (no minigame gate), a collectible recipe-dex with set bonuses, and a more generous gacha than any current cooking incremental.",
+      "risk": "SOFT CEILING. The only direct roll-gacha-on-food comp, Catch and Cook!, tops out at ~1,337 CCU with a mediocre 86.9% rating — the pure-RNG cooking loop clusters at ~1.3k, not 5k+. 1k is achievable but not comfortably exceeded; success leans on a more dopamine-rich gacha and execution.",
+      "retention": "Daily luck boost, weekly mythic dish drops + limited event recipes, recipe-dex set bonuses, rebirth prestige, kitchen-world unlocks.",
+      "monetization": "Luck/odds gamepass, auto-roll, 2x cash, offline-time; limited premium recipe banners. Core roll free.",
+      "virality": "Friends-luck multiplier; rare-dish reveal clips; trade/show-off shelf for mythic dishes.",
+      "evidence_games": [
+        {
+          "name": "Catch and Cook!",
+          "ccu": 1337,
+          "note": "Same skeleton (RNG-catch + cook + offline + luck); proves it clears 1k, but caps ~1.3k with an 86.9% rating."
+        },
+        {
+          "name": "Dumpling Squishy Race",
+          "ccu": 5440,
+          "note": "Incremental Sim; 5.4k in 32 days — fresh entrants break 1k fast in this genre."
+        }
+      ]
+    },
+    {
+      "title": "Baddie Bistro: Collect Chefs, Cook & Rebirth",
+      "tagline": "Roll rare chefs. Run the empire.",
+      "category": "emerging",
+      "confidence": "medium",
+      "scope": "M",
+      "lane": "restaurant (Tycoon) — OPEN, leader ~22%, 19+ winners",
+      "mechanics": [
+        "roll",
+        "gacha",
+        "tycoon",
+        "lucky",
+        "rebirth"
+      ],
+      "theme": "A stylish restaurant empire where the staff are gacha pulls — roll rare 'baddie' chefs and pets to staff your kitchen.",
+      "core_loop": "Roll randomized chef units (escalating rarity) -> assign to cooking stations (higher rarity = faster/rarer dishes) -> customers auto-pay, income accrues offline -> spend on roll tickets, luck/pets, station upgrades, expansions -> rebirth for permanent luck/cash multipliers -> chef-dex completion for buffs.",
+      "first_30_seconds": "Your empty diner has one station and a ROLL button. Tap -> a chef pops out with a rarity glow and a speed stat -> drop them on the station, customers stream in, cash ticks up. 'Roll for a rare chef?' The hook is staff-as-loot.",
+      "depth": "Two proven loops braided: an offline-serve tycoon (build/expand/optimize) and a rarity-chase (roll chefs/pets, complete the dex). Station synergies and chef placement add a light optimization puzzle; rebirth resets pace progression for 100h+.",
+      "why_now": "Run a Restaurant! (19,363 CCU @75d) and My Gaming Cafe! (4,011 @32d) prove fresh offline-serve tycoons clear 1k fast. The exact hybrid already prototypes as 'My Baddie Restaurant!' at 852 CCU @59d with a standout 0.275 ccu-per-1k-visits (high stickiness) — on the cusp of 1k with a thin build.",
+      "incumbent": "Run a Restaurant! (19,363 CCU) and Restaurant Tycoon 3 — pure build/serve tycoons with NO gacha.",
+      "differentiation": "Incumbents are pure build/serve tycoons. This injects the Slime-RNG collection spine (roll rare chefs, luck, pets, dex). Out-polish and out-content the rough 'My Baddie Restaurant' prototype.",
+      "risk": "The RNG-chef + tycoon fusion is UNPROVEN at 1k+ — the single direct precedent sits at 852 CCU (below the bar), and every game above 1k here is a pure tycoon with no gacha. The bet hinges on gacha LIFTING the game past entrenched pure-tycoon incumbents rather than just adding monetization friction.",
+      "retention": "Daily login chef ticket, weekly new chef rarities + limited event chefs, chef-dex set bonuses, rebirth ladder, restaurant theme expansions.",
+      "monetization": "Roll-ticket gamepass, luck/2x cash, auto-collect, VIP station slot; limited event chef banners. Core loop ungated.",
+      "virality": "Show off your rarest chef; friends-luck multiplier; 'I pulled a SECRET chef' clip bait; light trading.",
+      "evidence_games": [
+        {
+          "name": "Run a Restaurant!",
+          "ccu": 19363,
+          "note": "Fresh offline-serve restaurant tycoon, 19k @75d — proves the tycoon spine clears 1k fast (no gacha)."
+        },
+        {
+          "name": "My Baddie Restaurant!",
+          "ccu": 852,
+          "note": "The exact RNG-chef + restaurant-tycoon hybrid, 852 @59d with high stickiness (0.275 ccu/1k visits) — on the cusp on a thin build."
+        }
+      ]
+    },
+    {
       "title": "Steal a Brainrot Tycoon: Vault Wars",
       "tagline": "Build the vault. Steal their brainrots.",
       "category": "proven",
@@ -41,175 +155,8 @@
           "ccu": 20000,
           "note": "DERIVED: restaurant 93,182 x 22% and cooking 69,332 x 30% both imply ~19-21k CCU. Proves fresh offline-income tycoons clear 1k fast; the tycoon spine is well-trodden, only the brainrot+steal fusion is new."
         }
-      ]
-    },
-    {
-      "title": "Mutation Diner: Roll the Ingredient",
-      "tagline": "One ingredient. Infinite golden mutations",
-      "category": "proven",
-      "lane": "cooking (Incremental Simulator x Tycoon) — OPEN, 64.5 score, leader ~30%, 11 winners incl. 1 fresh",
-      "mechanics": [
-        "roll",
-        "lucky",
-        "build",
-        "collect",
-        "rebirth"
       ],
-      "theme": "A cozy roadside diner where you don't roll dishes — you roll MUTATIONS on a single base ingredient. A plain tomato can become Golden (x10), Rainbow (x50), or a 1-in-1M Galaxy tomato that pays for your whole kitchen.",
-      "core_loop": "Tap the Mutation Burner to roll a mutation on your ingredient (visible luck stat, escalating rarity) -> place mutated ingredients into auto-cooking stations that earn offline -> spend on better burners (rarity odds), luck potions, and new kitchen-worlds -> rebirth for permanent luck/multipliers -> complete the recipe-dex for income buffs. Pure Slime-RNG roll->collect->upgrade->unlock.",
-      "first_30_seconds": "You're handed one boring tomato and a glowing burner. ROLL -> the tomato shimmers GOLD with a rarity beam and an x10 popup -> drop it in the pan, watch cash fountain up. 'Roll again?' Free second roll hits Rainbow -> screen flashes, number goes huge. Hooked on the slot-machine before any tutorial text.",
-      "depth": "The Build A Ring Farm pattern: the mutation multiplier creates an exponential payout curve where luck investment, rarity odds, and rebirth timing form the optimization spine. Recipe-dex set bonuses reward completionists; world unlocks gate new mutation pools. Friction-free 'roll = instant reward' keeps cooking as a flex/collection layer, not a gate — the roll is the dopamine, the kitchen is the flex.",
-      "why_now": "Incremental Simulator x Tycoon is the brief's #1 untapped combo (512 vs 451 games, ZERO combined). Cooking lane is OPEN (64.5, Tycoon-dominant, fragmented, leader ~30%, 11 winners incl. 1 fresh). 'Build A Ring Farm' — a grow-sell incremental with the exact mutation-multiplier layer — hit ~40k CCU at 61 days, proving the mutation hook scales fast past 1k. No cooking game runs that engine. Purest fit for the user's Slime-RNG + cooking taste.",
-      "incumbent": "Catch and Cook! (~1.3k @102d) is the closest verified food-roll comp — and a warning: food-specific roll games cluster near a soft ~1.3k ceiling. The thesis depends on porting the ~40k Build A Ring Farm mutation engine onto food, not on existing food-roll comps.",
-      "differentiation": "Existing cooking incrementals roll DISHES (flat rarity). This rolls MUTATIONS with stacking multipliers — the exponential-payout pattern that let Build A Ring Farm hit ~40k where dish-rollers cluster at ~1.3k. The single-ingredient focus is instantly legible to a young audience: everyone understands 'make the tomato golden.'",
-      "retention": "Daily luck-boost login, weekly new mutation tiers + limited mythic mutations, recipe-dex completion, rebirth prestige ladder, kitchen-world unlocks pacing progression past 100h.",
-      "monetization": "2x luck, 2x cash, auto-roll, and offline-time gamepasses; limited premium mutation banners (event-only Galaxy odds); daily streak rewards. Core roll always free — luck only accelerates the chase.",
-      "virality": "Group luck multiplier when playing with friends; insane-mutation clips are the thumbnail (a giant glowing Galaxy tomato, 'x1,000,000?!'). Display shelf for show-off/trade.",
-      "scope": "M",
-      "confidence": "medium",
-      "evidence_games": [
-        {
-          "name": "Build A Ring Farm",
-          "ccu": 40000,
-          "note": "Grow-sell incremental with a mutation-multiplier layer, ~40k @61d (brief, vetted Concept #1) — direct proof the mutation engine scales fast past 1k. NOTE: adjacent (farming, not cooking)."
-        },
-        {
-          "name": "Catch and Cook!",
-          "ccu": 1354,
-          "note": "Closest verified food-roll comp, ~1.3k @102d. Real but a soft ~1.3k ceiling — the key risk for the food-specific framing this concept must break."
-        },
-        {
-          "name": "Sell Lemons (via vetted Concept #1)",
-          "ccu": 99000,
-          "note": "~99k food-stand sell loop cited in the brief — shows food-stand Tycoon demand exists; supporting, not a direct mutation-engine comp."
-        }
-      ]
-    },
-    {
-      "title": "Steal a Chef: Restaurant Heist Tycoon",
-      "tagline": "Cook, get rich, steal their chefs",
-      "category": "proven",
-      "lane": "restaurant / cooking (Tycoon) — OPEN, 78.1 score, 93,182 demand, leader ~22%, ~19-21 winners",
-      "mechanics": [
-        "roll",
-        "lucky",
-        "build",
-        "defense",
-        "collect"
-      ],
-      "theme": "Run a neon fast-food empire where your roster of rolled chefs is the prize — and rival players can break in and STEAL your best chef off the line if you leave it unguarded.",
-      "core_loop": "Roll random chefs (common -> mythic, visible luck stat) -> assign them to cooking stations where they auto-serve dishes for offline cash -> spend cash on roll tickets, luck potions, station upgrades, and security locks -> raid other players' restaurants to steal undefended chefs, or defend your own -> rebirth for permanent luck/cash multipliers and chef-dex set bonuses.",
-      "first_30_seconds": "Spawn in front of a single empty grill. Big glowing 'ROLL CHEF' button -> first free roll spits a chef out with a rarity beam and screen shake -> plop them on the grill, watch the first $ tick up in 3 seconds. A floating arrow points at a rival's kitchen: 'A Legendary chef is cooking unguarded — go steal it.'",
-      "depth": "Three interacting economies: the offline-tycoon cash curve, the gacha rarity ladder (luck investment vs payout), and the risk/reward steal-vs-defend layer that makes idle income contestable. Defense placement, chef positioning, and rebirth timing create genuine optimization; the steal layer adds a social PvP skill ceiling. Stays interesting because the meta is other players, not a fixed curve.",
-      "why_now": "Restaurant Tycoon is independently OPEN (score 78.1, demand 93,182, ~19-21 winners, leader 'Run a Restaurant!' only ~22% share). Steal-brainrot is the hottest meta (403,082, OPEN). UNTAPPED COMBOS explicitly names 'tycoon x brainrot' as popular-but-never-combined. No restaurant tycoon in the data carries a steal layer — this fuses the hottest open mechanic onto a proven-fragmented food lane, with chef gacha serving the user's cooking + RNG taste.",
-      "incumbent": "Run a Restaurant! — restaurant-lane leader at only ~22% (30% in cooking lane), a pure build/serve tycoon with NO gacha and NO steal layer. Its fragmented share is exactly the room for a differentiated entrant.",
-      "differentiation": "Every 1k+ game in the restaurant lane is a flat build-and-serve tycoon. This is the only one where your income source (chefs) is both a collectible AND contestable by other players — importing the steal-brainrot dopamine (~400k demand, adjacent lane) onto a fragmented food lane that lacks it entirely.",
-      "retention": "Daily login chef-roll, chef-dex completion set bonuses, weekly new chef banners (limited rares), leaderboard for richest restaurant / most chefs stolen, rebirth prestige. The steal layer gives a reason to log in and re-secure your roster.",
-      "monetization": "Auto-collect + auto-defend gamepass, 2x luck and 2x cash gamepasses, VIP instant-lock security, limited premium chef gacha banners, daily reward streak. Nothing gates the core roll — luck/defense only accelerate.",
-      "virality": "Group luck/cash multiplier when friends play; raiding is inherently social ('come help me steal his Mythic chef'); steal clips are high-CTR. Thumbnail: a chef yanked out of a kitchen with a giant red STOLEN stamp.",
-      "scope": "M",
-      "confidence": "medium",
-      "evidence_games": [
-        {
-          "name": "Run a Restaurant!",
-          "ccu": 20500,
-          "note": "Restaurant/cooking lane leader at only ~22%/30% share — proves the food-tycoon fantasy sustains 1k+ winners while staying fragmented and OPEN, with no gacha/steal layer to defend against. Derived from 93,182 x 22%."
-        },
-        {
-          "name": "Steal-brainrot lane (de-contaminated demand)",
-          "ccu": 403082,
-          "note": "Hottest open mechanic in the data, leader 40.6%; 'tycoon x brainrot' explicitly listed as never-combined. Lane demand, not a single game's CCU."
-        },
-        {
-          "name": "Restaurant lane (de-contaminated demand)",
-          "ccu": 93182,
-          "note": "Score 78.1, ~19-21 winners at 1k+, OPEN — proves entrants repeatedly clear 1k in this fragmented food lane. Lane demand, not a single game's CCU."
-        }
-      ]
-    },
-    {
-      "title": "Unbox a Tycoon: Crate Factory",
-      "tagline": "Open crates, build a loot empire, rebirth",
-      "category": "emerging",
-      "lane": "unboxing (Tycoon) — OPEN, most fragmented leader of any lane (23%), 21,261 de-contaminated demand",
-      "mechanics": [
-        "roll",
-        "lucky",
-        "build",
-        "collect",
-        "tower"
-      ],
-      "theme": "You run a crate-opening factory. Conveyor belts feed mystery crates into your unboxer; what pops out (pets, gems, relics across a rarity ladder) lands on display pedestals that generate passive income. Richer collection wall -> faster belts -> bigger crates. Industrial-arcade loot factory you physically grow on a plot.",
-      "core_loop": "Open crate (RNG reveal) -> collected item auto-displays and generates idle cash by rarity -> cash upgrades belt speed, crate tier, and luck -> unlock new factory wings (Pets -> Gems -> Mythic Beasts -> Cosmic) -> rebirth to a prestige factory for permanent luck+income multiplier. The Slime-RNG collection loop with a buildable Tycoon plot as the display surface.",
-      "first_30_seconds": "You walk onto an empty factory plot with one crate and a giant ROLL button. First crate is rigged to an 'Epic' pet that flies to a pedestal and immediately starts spitting visible coins. A second locked crate tier glints right next to you. Collect -> idle income -> visible next unlock, all in the first 20 seconds.",
-      "depth": "Two intersecting economies: the RNG collection (chase rarity, complete sets) and the Tycoon layout (placement matters — adjacency bonuses, themed-wing multipliers, belt-routing optimization). Players optimize a physical factory build AND a collection. Prestige resets add a meta-layer of luck-stat investment.",
-      "why_now": "unboxing is OPEN with the most fragmented leader of any lane (23% — vs garden 59%, pet 58%, merge 76%) and a real 21,261 demand after stripping 93% mega-title bleed (honest figure). It sits in Tycoon and directly executes the flagged Incremental-Simulator x Tycoon untapped combo (512 vs 451, 0 combined) — the biggest structural arbitrage in the brief. roll 1.21, lucky 1.30, build 1.32, tower 1.49 all over-index in hits.",
-      "incumbent": "No named in-lane benchmark exists — the unboxing leader is unnamed at 23%, which is both the opportunity and the risk (no proven 1k+ title to study in-lane). The studyable cross-lane benchmark is 'Run a Restaurant!'-style Tycoon retention applied to an unboxing reveal.",
-      "differentiation": "Most unboxing games are pure case-openers (open, see number, repeat) with thin retention; most tycoons lack the RNG dopamine. This makes the loot you unbox INTO the income engine of a buildable factory — reveal and tycoon are the same object. No combined Incremental-Sim x Tycoon game exists in the corpus, so this is uncontested whitespace.",
-      "retention": "Daily free crate (streak-scaled luck), weekly limited crate theme, prestige/rebirth ladder, set-completion display bonuses, leaderboard for factory income/hour, friends-server group-luck multiplier. New factory wing every weekly update feeds the unlock treadmill.",
-      "monetization": "2x Luck pass, Auto-Open pass (idle crate opening), 2x Income pass, limited weekly premium crates (gacha), rebirth-skip token, VIP pedestal slots, cosmetic factory skins. No fun gated — luck passes change odds-to-good, not access.",
-      "virality": "'Secret pet' reveals are inherently shareable; a wall of rare loot is a screenshot flex. Group-luck draws friends. Thumbnail of a rainbow crate exploding into a giant mythic with 'I GOT THE 1-IN-A-MILLION' is proven high-CTR. Trading (later) adds social stickiness.",
-      "scope": "M",
-      "confidence": "medium",
-      "evidence_games": [
-        {
-          "name": "Unboxing-lane leader (23%, unnamed)",
-          "ccu": 4800,
-          "note": "DERIVED, not measured: ~23% of the 21,261 de-contaminated demand. Most fragmented leader of any OPEN lane = low bar to top, but no named comp to study in-lane."
-        },
-        {
-          "name": "Merge a Nuke!",
-          "ccu": 26000,
-          "note": "DERIVED (~76% of 35,249 merge demand). Caveat: this is the MONOLITH the brief says AVOID; cited only as weak proof a single-mechanic Tycoon reveal can hold 5-figure CCU, not as a model to copy."
-        },
-        {
-          "name": "Incremental-Sim x Tycoon combo (untapped)",
-          "ccu": 0,
-          "note": "Brief's flagged #1 arbitrage: 512 vs 451 games, 0 combined. Structural whitespace this card executes — novelty is the upside and the unproven-retention risk."
-        }
-      ]
-    },
-    {
-      "title": "Grow a Spice Garden: Mutation Kitchen",
-      "tagline": "Grow, roll mutations, cook, sell, defend",
-      "category": "bold",
-      "lane": "restaurant/food-stand (Tycoon) — OPEN, 93,182 demand, leader 22%; rides garden 821k + steal 403k",
-      "mechanics": [
-        "lucky",
-        "roll",
-        "build",
-        "survive",
-        "defense"
-      ],
-      "theme": "A cozy food-garden where you grow ingredients, but each harvest ROLLS a mutation (Golden, Rainbow, On-Fire, Frozen, Giant) that sets its value. You don't just sell raw crops — you COOK mutated ingredients into signature dishes at your food stand (the wedge that makes this a food-stand identity, not a generic garden). A light steal/defend layer lets players raid neighbors' ripe golden crops and fence their own.",
-      "core_loop": "Plant seed -> auto-grow -> HARVEST triggers a mutation roll (RNG) -> COOK the mutated ingredient into a dish at your stand -> sell for cash scaled by mutation rarity x recipe tier -> buy luck, plots, rarer seeds, recipes, fences -> unlock new ingredient/dish tiers -> rebirth for permanent mutation-luck multiplier. Slime-RNG collection (the mutation index) bolted onto a cooking-stand tycoon with a steal-brainrot social spike.",
-      "first_30_seconds": "You get one plot and a seed. It auto-grows in ~8s; first harvest is rigged to a 'Golden' mutation (gold burst, '+x5', screen pop), auto-cooks into your first dish, auto-sells, cash rockets, and a second plot unlocks for a few coins. The mutation index flashes '1/120 discovered'. Collect, cook, upgrade — under 30 seconds.",
-      "depth": "Seed strain x growth condition x mutation x recipe forms a deep optimization board; some strains bias toward certain mutations and some dishes multiply specific rarities, so players engineer combos. Sell-timing vs steal-risk adds social tension. Mutation index (120+ entries) plus recipe set bonuses and rebirth luck-stat investment sustain long-tail play. NOTE: scope is heavy — four fused systems (garden sim, RNG index, cooking, steal/defend); each must be cut to its minimum viable form to ship.",
-      "why_now": "Rides high-demand signals — garden (821k) and steal-brainrot (403k, hot meta) — while landing in the OPEN restaurant/food-stand Tycoon lane (93,182, leader only 22%). The proven-but-noisy lead harvest×steal / garden×sell -> 'Grow a Garden 2' (508k) confirms the mutation-harvest loop works at massive scale, BUT that scale belongs to the garden monolith; we capture it by re-skinning to cooking and wedging the fragmented food-stand lane. lucky 1.30, survive 1.21, defense 1.53, roll 1.21, build 1.32 all over-index.",
-      "incumbent": "Grow a Garden 2 (59% of garden lane, 508k) is the monolith — do NOT fight head-on. Beat the fragmented food-stand leader 'Run a Restaurant!' (22% of 93k) by owning the 'RNG mutation + cooking-sell' niche rather than competing as a general garden.",
-      "differentiation": "Grow a Garden 2 is a general-purpose plant-collect garden; this narrows hard into a COOKING/food-stand identity — you grow to cook and sell DISHES, not collect raw plants — and fuses the steal social spike. Mutation-roll-as-core (vs garden's plant-collect) is the Slime-RNG hook the monolith underweights. The cooking layer is load-bearing: without it this is just a Grow-a-Garden clone fighting a 59% monolith, so the dish/recipe system must be real, not cosmetic.",
-      "retention": "Daily seed (streak luck), weekly limited seed strain + mutation, steal/defend social loop (revenge mechanic), rebirth ladder, mutation-index and recipe set bonuses, friends-server group-luck multiplier, seasonal mutation events. The steal mechanic creates organic 'come back to check my crops' habit.",
-      "monetization": "2x Mutation-Luck pass, Auto-Harvest/Auto-Cook pass, 2x Sell pass, theft-shield gamepass, limited premium seed crates (gacha weekly), rebirth-skip, VIP plot slots. Fun ungated; passes accelerate luck and idle, not access to mutations.",
-      "virality": "Stealing a friend's Rainbow crop is a built-in clip moment; 'steal' is the hottest meta (403k). Mutation reveals are screenshot bait. Thumbnail of a giant rainbow carrot with 'I STOLE THE 1-IN-A-MILLION CROP' targets both garden and steal audiences. Group-luck and revenge loops drive friend-pull.",
-      "scope": "L",
-      "confidence": "medium",
-      "evidence_games": [
-        {
-          "name": "Grow a Garden 2",
-          "ccu": 508000,
-          "note": "Validates mutation-harvest loop at huge scale (garden leader, 59%) — but a monolith to wedge around via cooking re-skin, NOT to fight."
-        },
-        {
-          "name": "Steal-brainrot leader",
-          "ccu": 163000,
-          "note": "Derived: 40.6% of 403,082 steal-brainrot demand. Hot steal meta — the social spike layer borrows proven demand."
-        },
-        {
-          "name": "Run a Restaurant!",
-          "ccu": 20500,
-          "note": "Food-stand Tycoon lane leader at only 22% of 93,182 — the actual OPEN target to top. Reached only if the cooking layer is real, not just framing."
-        }
-      ]
+      "risk": "tycoon x brainrot has no proven 1k+ incumbent yet — both halves are proven separately, but the steal/defend + offline-tycoon balance is execution-heavy (scope L), and the brainrot meme trend could cool before launch."
     },
     {
       "title": "Hatch a Pet: Roll, Steal & Trade Tycoon",
@@ -251,7 +198,51 @@
           "ccu": 821241,
           "note": "Real (brief: garden 821,241; harvest x steal a proven combo). Proves steal/trade-on-collectibles is a mega-scale retained pattern, de-risking the steal+trade layer."
         }
-      ]
+      ],
+      "risk": "Adopt Me (250k) and Pet Simulator dominate pet-hatch; differentiation rests entirely on the steal/trade social layer surviving against entrenched giants."
+    },
+    {
+      "title": "Unbox a Tycoon: Crate Factory",
+      "tagline": "Open crates, build a loot empire, rebirth",
+      "category": "emerging",
+      "lane": "unboxing (Tycoon) — OPEN, most fragmented leader of any lane (23%), 21,261 de-contaminated demand",
+      "mechanics": [
+        "roll",
+        "lucky",
+        "build",
+        "collect",
+        "tower"
+      ],
+      "theme": "You run a crate-opening factory. Conveyor belts feed mystery crates into your unboxer; what pops out (pets, gems, relics across a rarity ladder) lands on display pedestals that generate passive income. Richer collection wall -> faster belts -> bigger crates. Industrial-arcade loot factory you physically grow on a plot.",
+      "core_loop": "Open crate (RNG reveal) -> collected item auto-displays and generates idle cash by rarity -> cash upgrades belt speed, crate tier, and luck -> unlock new factory wings (Pets -> Gems -> Mythic Beasts -> Cosmic) -> rebirth to a prestige factory for permanent luck+income multiplier. The Slime-RNG collection loop with a buildable Tycoon plot as the display surface.",
+      "first_30_seconds": "You walk onto an empty factory plot with one crate and a giant ROLL button. First crate is rigged to an 'Epic' pet that flies to a pedestal and immediately starts spitting visible coins. A second locked crate tier glints right next to you. Collect -> idle income -> visible next unlock, all in the first 20 seconds.",
+      "depth": "Two intersecting economies: the RNG collection (chase rarity, complete sets) and the Tycoon layout (placement matters — adjacency bonuses, themed-wing multipliers, belt-routing optimization). Players optimize a physical factory build AND a collection. Prestige resets add a meta-layer of luck-stat investment.",
+      "why_now": "unboxing is OPEN with the most fragmented leader of any lane (23% — vs garden 59%, pet 58%, merge 76%) and a real 21,261 demand after stripping 93% mega-title bleed (honest figure). It sits in Tycoon and directly executes the flagged Incremental-Simulator x Tycoon untapped combo (512 vs 451, 0 combined) — the biggest structural arbitrage in the brief. roll 1.21, lucky 1.30, build 1.32, tower 1.49 all over-index in hits.",
+      "incumbent": "No named in-lane benchmark exists — the unboxing leader is unnamed at 23%, which is both the opportunity and the risk (no proven 1k+ title to study in-lane). The studyable cross-lane benchmark is 'Run a Restaurant!'-style Tycoon retention applied to an unboxing reveal.",
+      "differentiation": "Most unboxing games are pure case-openers (open, see number, repeat) with thin retention; most tycoons lack the RNG dopamine. This makes the loot you unbox INTO the income engine of a buildable factory — reveal and tycoon are the same object. No combined Incremental-Sim x Tycoon game exists in the corpus, so this is uncontested whitespace.",
+      "retention": "Daily free crate (streak-scaled luck), weekly limited crate theme, prestige/rebirth ladder, set-completion display bonuses, leaderboard for factory income/hour, friends-server group-luck multiplier. New factory wing every weekly update feeds the unlock treadmill.",
+      "monetization": "2x Luck pass, Auto-Open pass (idle crate opening), 2x Income pass, limited weekly premium crates (gacha), rebirth-skip token, VIP pedestal slots, cosmetic factory skins. No fun gated — luck passes change odds-to-good, not access.",
+      "virality": "'Secret pet' reveals are inherently shareable; a wall of rare loot is a screenshot flex. Group-luck draws friends. Thumbnail of a rainbow crate exploding into a giant mythic with 'I GOT THE 1-IN-A-MILLION' is proven high-CTR. Trading (later) adds social stickiness.",
+      "scope": "M",
+      "confidence": "medium",
+      "evidence_games": [
+        {
+          "name": "Unboxing-lane leader (23%, unnamed)",
+          "ccu": 4800,
+          "note": "DERIVED, not measured: ~23% of the 21,261 de-contaminated demand. Most fragmented leader of any OPEN lane = low bar to top, but no named comp to study in-lane."
+        },
+        {
+          "name": "Merge a Nuke!",
+          "ccu": 26000,
+          "note": "DERIVED (~76% of 35,249 merge demand). Caveat: this is the MONOLITH the brief says AVOID; cited only as weak proof a single-mechanic Tycoon reveal can hold 5-figure CCU, not as a model to copy."
+        },
+        {
+          "name": "Incremental-Sim x Tycoon combo (untapped)",
+          "ccu": 0,
+          "note": "Brief's flagged #1 arbitrage: 512 vs 451 games, 0 combined. Structural whitespace this card executes — novelty is the upside and the unproven-retention risk."
+        }
+      ],
+      "risk": "Unboxing's REAL demand is thin once the keyboard mega-title bleed is removed (~21k); the lane is open but small — 1k is reachable, but big upside is less certain."
     },
     {
       "title": "Hatch & Hold: Monster Tower Survival",
@@ -293,49 +284,8 @@
           "ccu": 0,
           "note": "Brief gives LIFT not CCU: roll 1.21, lucky 1.30 over-index in winners — proves hatch-RNG collection dopamine scales. Only the fusion of the two halves is unproven."
         }
-      ]
-    },
-    {
-      "title": "Hide the Chef: Kitchen Hide & Seek Tycoon",
-      "tagline": "Hide your chefs. Cook before they're caught",
-      "category": "bold",
-      "lane": "cooking / restaurant (Tycoon x Hide) — OPEN, fragmented (leaders 22-30%, ~11-21 winners)",
-      "mechanics": [
-        "hide",
-        "defense",
-        "lucky",
-        "roll",
-        "build"
       ],
-      "theme": "A chaotic restaurant where a roaming Health Inspector (NPC, scaling into player-controlled) tries to catch your illegal star chefs. Hide your rolled chefs in vents, walk-in freezers, and dumpster props — the longer they cook undiscovered, the bigger the payout.",
-      "core_loop": "Roll chefs from the gacha -> physically HIDE them around your kitchen in prop spots (high-traffic = more cash but easier to find) -> a Health Inspector patrols hunting them -> survive the round to bank multiplied cash, get caught and lose the chef's earnings -> reinvest in better hiding spots, decoys, luck, and new chefs -> rebirth for permanent multipliers.",
-      "first_30_seconds": "You roll a chef, then a giant arrow: 'HIDE HIM before the Inspector comes!' You drag the chef into a freezer — a countdown and a creeping flashlight appear. The Inspector rounds the corner, you hold your breath, he passes, CASH x3 pops. Legible tension in under 20 seconds.",
-      "depth": "Grafts the two highest-lift hit ingredients (hide 1.58, defense 1.53) onto a tycoon economy. Hiding-spot selection is a real risk/reward spatial puzzle layered over the gacha rarity chase and offline-cash curve. The seeker role (NPC scaling into player-controlled inspector) adds an asymmetric PvP skill ceiling. CAVEAT: no comp in the corpus carries both hide and cooking/tycoon tags, so transfer of those lifts to a food-tycoon economy is unproven — this is the core bet, not a settled mechanic.",
-      "why_now": "'hide' (1.58) and 'defense' (1.53) are the #2 and #3 winning-ingredient tag lifts in the entire corpus (only car 1.68 is higher), yet no cooking/restaurant game uses them. Cooking and restaurant lanes are both OPEN and fragmented (leaders 22-30%, ~11-21 winners). Grafting the two most over-indexing hit mechanics onto a proven-open food lane that lacks any hide/seek tension is a clean white-space bet.",
-      "incumbent": "Run a Restaurant! (~20.5k CCU) — pure passive build/serve with zero tension or seeker loop; and broadly the hide-genre leaders that have no food/tycoon economy attached.",
-      "differentiation": "No restaurant tycoon has a hide-and-seek round loop; no hide-and-seek game has a cooking-tycoon economy. This is the only title where idle food income is gated behind active hide/defend tension — giving the lane the moment-to-moment thrill its passive incumbents lack, using the two highest-lift mechanics in the data. Risk: it is the only white-space here precisely because no proven comp validates the combo.",
-      "retention": "Round-based replay (each round a fresh hide puzzle), daily chef-roll, new hiding-spot prop packs weekly, Inspector difficulty ladder, rebirth prestige, leaderboard for longest-hidden chef / most rounds survived.",
-      "monetization": "2x cash + 2x luck gamepasses, premium hiding-spot prop packs (cosmetic + slight edge), auto-hide VIP, decoy-pack gacha, daily streak. Core hide loop is free — paid spots accelerate but placement skill still decides outcomes.",
-      "virality": "Friends defend one kitchen co-op vs the Inspector (group multiplier); the hide/catch moment is the ideal clip and thumbnail (a chef yanked out of a vent, 'CAUGHT!'). Asymmetric seeker role drives 'play with me' invites.",
-      "scope": "L",
-      "confidence": "low",
-      "evidence_games": [
-        {
-          "name": "Run a Restaurant!",
-          "ccu": 20494,
-          "note": "Restaurant/cooking lane incumbent (leader 22-30% share) with zero tension loop — the passive lane this injects hide/seek thrill into. Verified in brief."
-        },
-        {
-          "name": "Catch and Cook!",
-          "ccu": 1354,
-          "note": "Cooking incremental @102d at the ~1.3k soft ceiling — evidence a plain food hook caps near 1k and a stronger active mechanic is needed to break past it. Verified in brief."
-        },
-        {
-          "name": "hide / defense tag lift among 1k+ winners",
-          "ccu": 0,
-          "note": "Brief gives LIFT not CCU: hide 1.58 and defense 1.53 are the #2/#3 highest lifts in the corpus, absent from every food lane. The whole bet is whether those lifts transfer to a food-tycoon economy — unproven by any comp."
-        }
-      ]
+      "risk": "survive x hatch is an untapped combo with NO positive proof of the fusion at 1k+; tower-defense wave balancing is heavier to build than a pure idle loop."
     }
   ]
 }

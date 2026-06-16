@@ -456,6 +456,7 @@ function openRec(i){ const c=(DATA.recommendations||[])[i]; if(!c)return;
     <div class="meta"><span class="badge b-${c.category}">${esc(c.category)}</span><span class="badge b-${c.confidence}">${esc(c.confidence)} confidence</span><span class="badge">scope ${esc(c.scope)}</span><span class="badge">${esc(c.lane||'')}</span></div>
     ${sec('Core loop',c.core_loop)}${sec('First 30 seconds (the hook)',c.first_30_seconds)}${sec('Depth — why it stays fun',c.depth)}
     ${sec('Why now (the data)',c.why_now)}${sec('Incumbent to beat',c.incumbent)}${sec('Differentiation',c.differentiation)}
+    ${c.risk?('<section><h4 style="color:var(--orange)">Biggest risk</h4><p>'+esc(c.risk)+'</p></section>'):''}
     ${sec('Retention',c.retention)}${sec('Monetization',c.monetization)}${sec('Virality / social',c.virality)}
     ${sec('Mechanics & theme',((c.mechanics||[]).join(', '))+(c.theme?(' &middot; '+c.theme):''))}
     ${ev?('<section><h4>Evidence (real games)</h4><p>'+ev+'</p></section>'):''}`;
