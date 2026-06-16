@@ -1,6 +1,6 @@
-# Daily Roblox dashboard refresh — run from YOUR machine (residential IP).
+# Daily Roblox dashboard refresh - run from YOUR machine (residential IP).
 # Roblox blocks most datacenter IPs, so this is the reliable updater (not CI).
-# It re-harvests live data, rebuilds the dashboard, and pushes — GitHub Pages then
+# It re-harvests live data, rebuilds the dashboard, and pushes - GitHub Pages then
 # serves the new version within ~1 minute.
 #
 # Run once:        powershell -ExecutionPolicy Bypass -File update.ps1
@@ -23,7 +23,8 @@ git add -A
 if (git status --porcelain) {
     git commit -m "chore: daily Roblox data refresh" | Out-Null
     git push
-    Write-Host "Done — pushed. Live site updates in ~1 min: https://brayanlondono13.github.io/roblox-idea-finder/"
+    Write-Host "Done - pushed. Live site updates in ~1 min:"
+    Write-Host "https://brayanlondono13.github.io/roblox-idea-finder/"
 } else {
     Write-Host "No changes to publish."
 }
